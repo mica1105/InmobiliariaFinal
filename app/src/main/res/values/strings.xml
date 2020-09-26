@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">InmobiliariaFinal</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Micaela Dure</string>
+    <string name="nav_header_subtitle">mika@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_propiedades">Propiedades</string>
+    <string name="menu_inquilinos">Inquilinos</string>
+    <string name="menu_pagos">Pagos</string>
+    <string name="menu_contratos">Contratos</string>
+    <string name="menu_cerrar">Cerrar Sesión</string>
+</resources>
