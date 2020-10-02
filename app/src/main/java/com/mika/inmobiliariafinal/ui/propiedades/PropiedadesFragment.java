@@ -32,9 +32,10 @@ import java.util.List;
 public class PropiedadesFragment extends Fragment {
 
     private ViewPager viewPager;
+    private AppBarLayout appBar;
     private TabLayout tabLayout;
-    private AppBarLayout appBarLayout;
     private PropiedadesViewModel vm;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,36 +46,28 @@ public class PropiedadesFragment extends Fragment {
 
     private void inicializar(View v){
         viewPager= v.findViewById(R.id.viewPager);
-        appBarLayout= v.findViewById(R.id.appBar);
+        appBar=v.findViewById(R.id.appBar);
         tabLayout= new TabLayout(getContext());
-
-        appBarLayout.addView(tabLayout);
-
-        ViewPageAdapter vpa= new ViewPageAdapter(getParentFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        vpa.addFragment(new InmuebleFragment(),"Propiedad1");
-        vpa.addFragment(new InmuebleFragment(),"Propiedad2");
-        vpa.addFragment(new InmuebleFragment(),"Propiedad3");
-        vpa.addFragment(new InmuebleFragment(),"Propiedad4");
-
-        viewPager.setAdapter(vpa);
-        tabLayout.setupWithViewPager(viewPager);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PropiedadesViewModel.class);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        appBar.addView(tabLayout);
+        vm.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Propiedad>>() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public void onChanged(ArrayList<Propiedad> propiedads) {
+                ViewPageAdapter adapter= new ViewPageAdapter(getParentFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+                int numero = 0;
+                for(Propiedad inmueble :propiedads) {
+                    numero ++;
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("inmueble",inmueble);
+                    InmuebleFragment fragment= new InmuebleFragment();
+                    fragment.setArguments(bundle);
+                    adapter.addFragment(fragment,"Inmueble"+numero);
+                }
+                viewPager.setAdapter(adapter);
+                tabLayout.setupWithViewPager(viewPager);
             }
         });
+        vm.recuperarPropiedades();
     }
 
     public class ViewPageAdapter extends FragmentPagerAdapter{

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.mika.inmobiliariafinal.R;
 import com.mika.inmobiliariafinal.modelo.Propiedad;
 import com.mika.inmobiliariafinal.modelo.Propietario;
 
@@ -12,9 +13,9 @@ import java.util.List;
 
 public class PropiedadesViewModel extends ViewModel {
 
-    private MutableLiveData<ArrayList> inmuebles;
+    private MutableLiveData<ArrayList<Propiedad>> inmuebles;
 
-    public LiveData<ArrayList> getInmuebles() {
+    public LiveData<ArrayList<Propiedad>> getInmuebles() {
         if(inmuebles == null){
             inmuebles= new MutableLiveData<>();
         }
@@ -23,14 +24,11 @@ public class PropiedadesViewModel extends ViewModel {
 
     public void recuperarPropiedades(){
         ArrayList<Propiedad> propiedades= new ArrayList<>();
-        Propiedad p1= new Propiedad("España 742", 3, "Casa","Domestico",15000,true);
-        Propiedad p2= new Propiedad("Av. Centenario 429", 4, "Casa","Domestico",18000,true);
-        Propiedad p3= new Propiedad("Av.Illia 746", 3, "Departamento","Domestico",13000,true);
-        Propiedad p4= new Propiedad("Junin 461", 2, "Local","Comercial",15000,true);
-        propiedades.add(p1);
-        propiedades.add(p2);
-        propiedades.add(p3);
-        propiedades.add(p4);
+        propiedades.add(new Propiedad(R.drawable.casa1,"España 742", 3, "Casa","Domestico",15000,true));
+        propiedades.add(new Propiedad(R.drawable.casa2,"Av. Centenario 429", 4, "Casa","Domestico",18000,true));
+        propiedades.add(new Propiedad(R.drawable.dto1,"Av.Illia 746", 3, "Departamento","Domestico",13000,true));
+         propiedades.add(new Propiedad(R.drawable.local1,"Junin 461", 2, "Local","Comercial",15000,true));
+
         inmuebles.setValue(propiedades);
     }
 }

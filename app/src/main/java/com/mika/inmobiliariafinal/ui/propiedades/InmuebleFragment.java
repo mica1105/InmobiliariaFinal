@@ -3,59 +3,55 @@ package com.mika.inmobiliariafinal.ui.propiedades;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.mika.inmobiliariafinal.R;
+import com.mika.inmobiliariafinal.modelo.Propiedad;
 
 public class InmuebleFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public InmuebleFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment InmuebleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static InmuebleFragment newInstance(String param1, String param2) {
-        InmuebleFragment fragment = new InmuebleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private EditText domicilio, ambietes, tipo,uso,precio;
+    private ImageView foto;
+    private CheckBox disponible;
+    private InmuebleViewModel vm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inmueble, container, false);
+       View root=inflater.inflate(R.layout.fragment_inmueble, container, false);
+       inicializar(root);
+        return root;
     }
+    public void inicializar(View v){
+        domicilio= v.findViewById(R.id.etDireccion);
+        ambietes=v.findViewById(R.id.etAmbientes);
+        tipo=v.findViewById(R.id.etTipo);
+        uso=v.findViewById(R.id.etUso);
+        precio=v.findViewById(R.id.etPrecio);
+        foto=v.findViewById(R.id.ivFoto);
+        disponible=v.findViewById(R.id.cbDisponible);
+        vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmuebleViewModel.class);
+        vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<Propiedad>() {
+            @Override
+            public void onChanged(Propiedad propiedad) {
+                domicilio.setText(propiedad.getDomicilio());
+                ambietes.setText(propiedad.getAmbientes()+"");
+                tipo.setText(propiedad.getTipo());
+                uso.setText(propiedad.getUso());
+                precio.setText("$"+propiedad.getPrecio());
+                foto.setImageResource(propiedad.getFoto());
+                disponible.setChecked(propiedad.isDisponible());
+            }
+        });
+        vm.cargarInmueble(getArguments());
+    }
+
 }
