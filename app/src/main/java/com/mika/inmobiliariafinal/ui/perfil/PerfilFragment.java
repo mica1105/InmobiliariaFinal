@@ -67,5 +67,18 @@ public class PerfilFragment extends Fragment {
                 btAceptar.setVisibility(View.VISIBLE);
             }
         });
+        btAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etDni.setEnabled(false);
+                etApellido.setEnabled(false);
+                etNombre.setEnabled(false);
+                etTelefono.setEnabled(false);
+                etEmail.setEnabled(false);
+                etPassword.setEnabled(false);
+                btEditar.setVisibility(View.VISIBLE);
+                btAceptar.setVisibility(View.GONE);
+            }
+        });
     }
 }

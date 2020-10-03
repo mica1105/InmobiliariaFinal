@@ -10,6 +10,7 @@
     <string name="menu_perfil">Perfil</string>
     <string name="menu_propiedades">Propiedades</string>
     <string name="menu_inquilinos">Inquilinos</string>
+    <string name="menu_inquilino">Datos del Inquilino</string>
     <string name="menu_pagos">Pagos</string>
     <string name="menu_contratos">Contratos</string>
     <string name="menu_cerrar">Cerrar Sesión</string>

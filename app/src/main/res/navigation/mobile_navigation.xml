@@ -21,7 +21,11 @@
         android:id="@+id/nav_inquilinos"
         android:name="com.mika.inmobiliariafinal.ui.inquilinos.InquilinosFragment"
         android:label="@string/menu_inquilinos"
-        tools:layout="@layout/fragment_inquilinos" />
+        tools:layout="@layout/fragment_inquilinos" >
+        <action
+            android:id="@+id/action_nav_inquilinos_to_inquilinoFragment"
+            app:destination="@id/inquilinoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_pagos"
         android:name="com.mika.inmobiliariafinal.ui.pagos.PagosFragment"
@@ -37,4 +41,13 @@
         android:name="com.mika.inmobiliariafinal.ui.salir.SalirFragment"
         android:label="@string/menu_cerrar"
         tools:layout="@layout/fragment_salir" />
+    <fragment
+        android:id="@+id/inquilinoFragment"
+        android:name="com.mika.inmobiliariafinal.ui.inquilinos.InquilinoFragment"
+        android:label="@string/menu_inquilino"
+        tools:layout="@layout/fragment_inquilino" >
+        <action
+            android:id="@+id/action_inquilinoFragment_to_nav_inquilinos"
+            app:destination="@id/nav_inquilinos" />
+    </fragment>
 </navigation>

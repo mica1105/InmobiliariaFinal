@@ -11,7 +11,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="@color/design_default_color_error"
+        android:background="#A569BD"
         android:theme="@style/AppTheme" />
 
     <androidx.viewpager.widget.ViewPager

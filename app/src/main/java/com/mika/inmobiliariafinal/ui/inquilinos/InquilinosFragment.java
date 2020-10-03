@@ -4,32 +4,45 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mika.inmobiliariafinal.R;
+import com.mika.inmobiliariafinal.modelo.Inquilino;
+
+import java.util.ArrayList;
 
 public class InquilinosFragment extends Fragment {
 
-    private InquilinosViewModel inquilinosViewModel;
+    private InquilinosViewModel vm;
+    private RecyclerView recyclerView;
+    private CabeceraAdapter cabeceraAdapter;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        inquilinosViewModel =
-                ViewModelProviders.of(this).get(InquilinosViewModel.class);
         View root = inflater.inflate(R.layout.fragment_inquilinos, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        inquilinosViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        inicializar(root);
+        return root;
+    }
+
+    public void inicializar(View v){
+        recyclerView= v.findViewById(R.id.rvInquilinos);
+        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InquilinosViewModel.class);
+        vm.getInquilinos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inquilino>>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onChanged(final ArrayList<Inquilino> inquilinos) {
+                cabeceraAdapter= new CabeceraAdapter(inquilinos);
+                recyclerView.setAdapter(cabeceraAdapter);
             }
         });
-        return root;
+        vm.recuperarInquilinos();
     }
 }
