@@ -15,7 +15,7 @@ public class SalirViewModel extends ViewModel {
     }
 
     public void mostrarMensaje(){
-        String mensaje= "¿Esta seguro que desea cerrar sesión?";
+        String mensaje= "¿Esta seguro que desea \n cerrar sesión?";
         this.mensaje.setValue(mensaje);
     }
 }
