@@ -58,7 +58,7 @@ public class PagosFragment extends Fragment {
             vm.recuperarPagos(getArguments());
         }
         else {
-            direccion.setText("Seleccione una Propiedad");
+            direccion.setText("Seleccione un Contrato");
         }
     }
 }
