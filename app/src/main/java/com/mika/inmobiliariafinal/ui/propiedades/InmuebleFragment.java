@@ -5,10 +5,12 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,6 +24,7 @@ public class InmuebleFragment extends Fragment {
     private ImageView foto;
     private CheckBox disponible;
     private InmuebleViewModel vm;
+    private Button contratos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,10 +41,11 @@ public class InmuebleFragment extends Fragment {
         precio=v.findViewById(R.id.etPrecio);
         foto=v.findViewById(R.id.ivFoto);
         disponible=v.findViewById(R.id.cbDisponible);
+        contratos=v.findViewById(R.id.btContratos);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmuebleViewModel.class);
         vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<Propiedad>() {
             @Override
-            public void onChanged(Propiedad propiedad) {
+            public void onChanged(final Propiedad propiedad) {
                 domicilio.setText(propiedad.getDomicilio());
                 ambietes.setText(propiedad.getAmbientes()+"");
                 tipo.setText(propiedad.getTipo());
@@ -49,6 +53,14 @@ public class InmuebleFragment extends Fragment {
                 precio.setText("$"+propiedad.getPrecio());
                 foto.setImageResource(propiedad.getFoto());
                 disponible.setChecked(propiedad.isDisponible());
+                contratos.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle= new Bundle();
+                        bundle.putSerializable("inmueble", propiedad);
+                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_contratos,bundle);
+                    }
+                });
             }
         });
         vm.cargarInmueble(getArguments());

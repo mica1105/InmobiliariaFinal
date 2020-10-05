@@ -52,24 +52,40 @@ public class ContratosFragment extends Fragment {
         tabLayout= new TabLayout(getContext());
         appBar.addView(tabLayout);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratosViewModel.class);
-        vm.getContratos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Contrato>>() {
-            @Override
-            public void onChanged(ArrayList<Contrato> contratos) {
-                ContratosFragment.ViewPageAdapter adapter= new ContratosFragment.ViewPageAdapter(getParentFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-                for(Contrato contrato :contratos) {
-                    String titulo=contrato.getId()+"";
+        final ContratosFragment.ViewPageAdapter adapter = new ContratosFragment.ViewPageAdapter(getParentFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        if(getArguments() != null){
+            vm.getAlquiler().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
+                @Override
+                public void onChanged(Contrato contrato) {
+                    String titulo = contrato.getId() + "";
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("contrato",contrato);
-                    ContratoFragment fragment= new ContratoFragment();
+                    bundle.putSerializable("contrato", contrato);
+                    ContratoFragment fragment = new ContratoFragment();
                     fragment.setArguments(bundle);
-                    adapter.addFragment(fragment,"Contrato"+titulo);
+                    adapter.addFragment(fragment, "Contrato" + titulo);
+                    viewPager.setAdapter(adapter);
+                    tabLayout.setupWithViewPager(viewPager);
                 }
-                viewPager.setAdapter(adapter);
-                tabLayout.setupWithViewPager(viewPager);
-            }
-        });
-        vm.recuperarContratos();
-
+            });
+            vm.recuperarContrato(getArguments());
+        }else {
+            vm.getContratos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Contrato>>() {
+                @Override
+                public void onChanged(ArrayList<Contrato> contratos) {
+                    for (Contrato contrato : contratos) {
+                        String titulo = contrato.getId() + "";
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("contrato", contrato);
+                        ContratoFragment fragment = new ContratoFragment();
+                        fragment.setArguments(bundle);
+                        adapter.addFragment(fragment, "Contrato" + titulo);
+                    }
+                    viewPager.setAdapter(adapter);
+                    tabLayout.setupWithViewPager(viewPager);
+                }
+            });
+            vm.recuperarContratos();
+        }
     }
 
     public class ViewPageAdapter extends FragmentPagerAdapter {
