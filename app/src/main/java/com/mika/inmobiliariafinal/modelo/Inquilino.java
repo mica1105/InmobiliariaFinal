@@ -3,6 +3,7 @@ package com.mika.inmobiliariafinal.modelo;
 import java.io.Serializable;
 
 public class Inquilino implements Serializable {
+    private int id;
     private String nombre;
     private String apellido;
     private String dni;
@@ -13,8 +14,9 @@ public class Inquilino implements Serializable {
     private String dniGarante;
     private String telGarante;
 
-    public Inquilino(String nombre, String apellido, String dni, String lugarDeTrabajo, String telefono, String email,
+    public Inquilino(int id, String nombre, String apellido, String dni, String lugarDeTrabajo, String telefono, String email,
                      String nombreGarante, String dniGarante, String telGarante) {
+        this.id=id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -24,6 +26,14 @@ public class Inquilino implements Serializable {
         this.nombreGarante = nombreGarante;
         this.dniGarante = dniGarante;
         this.telGarante = telGarante;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

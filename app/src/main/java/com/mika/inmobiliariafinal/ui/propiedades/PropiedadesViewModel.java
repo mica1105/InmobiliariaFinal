@@ -24,10 +24,10 @@ public class PropiedadesViewModel extends ViewModel {
 
     public void recuperarPropiedades(){
         ArrayList<Propiedad> propiedades= new ArrayList<>();
-        propiedades.add(new Propiedad(R.drawable.casa1,"España 742", 3, "Casa","Domestico",15000,true));
-        propiedades.add(new Propiedad(R.drawable.casa2,"Av. Centenario 429", 4, "Casa","Domestico",18000,true));
-        propiedades.add(new Propiedad(R.drawable.dto1,"Av.Illia 746", 3, "Departamento","Domestico",13000,true));
-         propiedades.add(new Propiedad(R.drawable.local1,"Junin 461", 2, "Local","Comercial",15000,true));
+        propiedades.add(new Propiedad(1,R.drawable.casa1,"España 742", 3, "Casa","Domestico",15000,true));
+        propiedades.add(new Propiedad(2,R.drawable.casa2,"Av. Centenario 429", 4, "Casa","Domestico",18000,true));
+        propiedades.add(new Propiedad(3,R.drawable.dto1,"Av.Illia 746", 3, "Departamento","Domestico",13000,true));
+        propiedades.add(new Propiedad(4,R.drawable.local1,"Junin 461", 2, "Local","Comercial",15000,true));
 
         inmuebles.setValue(propiedades);
     }

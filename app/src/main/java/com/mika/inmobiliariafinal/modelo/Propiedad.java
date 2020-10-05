@@ -3,6 +3,7 @@ package com.mika.inmobiliariafinal.modelo;
 import java.io.Serializable;
 
 public class Propiedad implements Serializable {
+    private int id;
     private int foto;
     private String domicilio;
     private int ambientes;
@@ -11,7 +12,8 @@ public class Propiedad implements Serializable {
     private double precio;
     private boolean disponible;
 
-    public Propiedad(int foto, String domicilio, int ambientes, String tipo, String uso, float precio, boolean disponible) {
+    public Propiedad(int id,int foto, String domicilio, int ambientes, String tipo, String uso, float precio, boolean disponible) {
+        this.id=id;
         this.foto= foto;
         this.domicilio = domicilio;
         this.ambientes = ambientes;
@@ -19,6 +21,14 @@ public class Propiedad implements Serializable {
         this.uso = uso;
         this.precio = precio;
         this.disponible = disponible;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getFoto() {

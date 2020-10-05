@@ -50,4 +50,9 @@
             android:id="@+id/action_inquilinoFragment_to_nav_inquilinos"
             app:destination="@id/nav_inquilinos" />
     </fragment>
+    <fragment
+        android:id="@+id/contratoFragment"
+        android:name="com.mika.inmobiliariafinal.ui.contratos.ContratoFragment"
+        android:label="fragment_contrato"
+        tools:layout="@layout/fragment_contrato" />
 </navigation>

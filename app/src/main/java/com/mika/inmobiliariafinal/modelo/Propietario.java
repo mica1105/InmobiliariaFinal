@@ -1,6 +1,7 @@
 package com.mika.inmobiliariafinal.modelo;
 
 public class Propietario {
+    private int id;
     private String dni;
     private  String apellido;
     private String nombre;
@@ -8,13 +9,22 @@ public class Propietario {
     private String mail;
     private String password;
 
-    public Propietario(String dni, String apellido, String nombre, String telefono, String mail, String password) {
+    public Propietario(int id,String dni, String apellido, String nombre, String telefono, String mail, String password) {
+        this.id=id;
         this.dni= dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.telefono= telefono;
         this.mail = mail;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDni() {

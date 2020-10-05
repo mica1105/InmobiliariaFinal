@@ -20,7 +20,7 @@ public class PerfilViewModel extends ViewModel {
     }
 
     public void recuperarPropietario(){
-        Propietario p= new Propietario("34921602","Dure","Micaela","2664540633","mika@gmail.com","mika");
+        Propietario p= new Propietario(5,"34921602","Dure","Micaela","2664540633","mika@gmail.com","mika");
         propietario.setValue(p);
     }
 }
