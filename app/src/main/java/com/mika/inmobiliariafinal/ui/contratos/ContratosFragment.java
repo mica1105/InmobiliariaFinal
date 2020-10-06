@@ -38,7 +38,6 @@ public class ContratosFragment extends Fragment {
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
     private ViewPageAdapter adapter;
-    private TextView mensaje;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -49,21 +48,12 @@ public class ContratosFragment extends Fragment {
     }
 
     public void inicializar(View v){
-        mensaje=v.findViewById(R.id.tvMensaje);
         viewPager= v.findViewById(R.id.vpContratos);
         tabLayout=v.findViewById(R.id.tlContratos);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratosViewModel.class);
         adapter= new ViewPageAdapter(getParentFragmentManager(),getLifecycle());
         if(getArguments() != null){
-            vm.getMensaje().observe(getViewLifecycleOwner(), new Observer<String>() {
-                @Override
-                public void onChanged(String s) {
-                    if(s != ""){
-                        mensaje.setText(s);
-                        mensaje.setVisibility(View.VISIBLE);
-                    }
-                }
-            });
+
             vm.getAlquiler().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
                 @Override
                 public void onChanged(Contrato contrato) {

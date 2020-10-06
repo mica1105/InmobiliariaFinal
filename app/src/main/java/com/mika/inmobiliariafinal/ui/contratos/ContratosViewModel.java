@@ -29,7 +29,6 @@ import java.util.Date;
 public class ContratosViewModel extends AndroidViewModel {
 private MutableLiveData<ArrayList<Contrato>> contratos;
 private MutableLiveData<Contrato> alquiler;
-private MutableLiveData<String>mensaje;
 private Context context;
 
     public ContratosViewModel(@NonNull Application application) {
@@ -42,13 +41,6 @@ private Context context;
         contratos= new MutableLiveData<>();
     }
         return contratos;
-    }
-
-    public LiveData<String> getMensaje() {
-        if (mensaje==null){
-            mensaje=new MutableLiveData<>();
-        }
-        return mensaje;
     }
 
     public LiveData<Contrato> getAlquiler() {
@@ -81,8 +73,6 @@ private Context context;
         for (Contrato contrato:alquileres){
             if (contrato.getInmueble().getId()==inmueble.getId()) {
                 alquiler.setValue(contrato);
-            }else {
-                mensaje.setValue("El inmueble seleccionado no \nposee contratos asociados");
             }
         }
     }

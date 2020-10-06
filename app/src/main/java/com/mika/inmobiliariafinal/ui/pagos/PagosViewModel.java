@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 public class PagosViewModel extends AndroidViewModel {
 private MutableLiveData<ArrayList<Pago>> pagos;
-private MutableLiveData<String> mensaje;
 private Context context;
 
     public PagosViewModel(@NonNull Application application) {
@@ -36,12 +35,6 @@ private Context context;
         return pagos;
     }
 
-    public LiveData<String> getMensaje() {
-        if (mensaje==null){
-            mensaje=new MutableLiveData<>();
-        }
-        return mensaje;
-    }
 
     public void recuperarPagos(Bundle bundle){
         Propiedad propiedad= (Propiedad) bundle.getSerializable("inmueble");
@@ -64,9 +57,6 @@ private Context context;
         for (Pago pago:pagos1){
             if (pago.getContrato().getInmueble().getId()==propiedad.getId()){
                 pagos2.add(pago);
-                mensaje.setValue(propiedad.getDomicilio());
-            }else {
-                mensaje.setValue("El inmueble seleccionado no \nposee pagos asosiados");
             }
         }
         pagos.setValue(pagos2);
