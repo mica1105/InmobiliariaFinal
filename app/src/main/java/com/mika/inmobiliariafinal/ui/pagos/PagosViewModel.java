@@ -1,7 +1,12 @@
 package com.mika.inmobiliariafinal.ui.pagos;
 
+import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -13,8 +18,15 @@ import com.mika.inmobiliariafinal.modelo.Propiedad;
 
 import java.util.ArrayList;
 
-public class PagosViewModel extends ViewModel {
+public class PagosViewModel extends AndroidViewModel {
 private MutableLiveData<ArrayList<Pago>> pagos;
+private MutableLiveData<String> mensaje;
+private Context context;
+
+    public PagosViewModel(@NonNull Application application) {
+        super(application);
+        context= application.getApplicationContext();
+    }
 
 
     public LiveData<ArrayList<Pago>> getPagos() {
@@ -24,6 +36,12 @@ private MutableLiveData<ArrayList<Pago>> pagos;
         return pagos;
     }
 
+    public LiveData<String> getMensaje() {
+        if (mensaje==null){
+            mensaje=new MutableLiveData<>();
+        }
+        return mensaje;
+    }
 
     public void recuperarPagos(Bundle bundle){
         Propiedad propiedad= (Propiedad) bundle.getSerializable("inmueble");
@@ -46,6 +64,9 @@ private MutableLiveData<ArrayList<Pago>> pagos;
         for (Pago pago:pagos1){
             if (pago.getContrato().getInmueble().getId()==propiedad.getId()){
                 pagos2.add(pago);
+                mensaje.setValue(propiedad.getDomicilio());
+            }else {
+                mensaje.setValue("El inmueble seleccionado no \nposee pagos asosiados");
             }
         }
         pagos.setValue(pagos2);

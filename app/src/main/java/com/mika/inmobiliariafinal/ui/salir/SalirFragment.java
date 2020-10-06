@@ -25,10 +25,6 @@ import com.mika.inmobiliariafinal.R;
 
 public class SalirFragment extends Fragment {
 
-    private SalirViewModel vm;
-    private TextView mensaje;
-    private Button salir,volver;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {

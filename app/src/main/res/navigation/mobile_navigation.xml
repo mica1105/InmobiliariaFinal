@@ -42,7 +42,11 @@
         android:id="@+id/nav_pagos"
         android:name="com.mika.inmobiliariafinal.ui.pagos.PagosFragment"
         android:label="@string/menu_pagos"
-        tools:layout="@layout/fragment_pagos" />
+        tools:layout="@layout/fragment_pagos" >
+        <action
+            android:id="@+id/action_nav_pagos_to_nav_propiedades"
+            app:destination="@id/nav_propiedades" />
+    </fragment>
     <fragment
         android:id="@+id/nav_contratos"
         android:name="com.mika.inmobiliariafinal.ui.contratos.ContratosFragment"

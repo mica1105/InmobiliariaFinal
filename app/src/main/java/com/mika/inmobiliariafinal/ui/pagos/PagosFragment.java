@@ -48,12 +48,15 @@ public class PagosFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PagosViewModel.class);
         if(getArguments() != null) {
+            vm.getMensaje().observe(getViewLifecycleOwner(), new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    direccion.setText(s);
+                }
+            });
             vm.getPagos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Pago>>() {
                 @Override
                 public void onChanged(ArrayList<Pago> pagos) {
-                    for (Pago pago:pagos){
-                        direccion.setText(pago.getContrato().getInmueble().getDomicilio());
-                    }
                     pagosAdapter = new PagosAdapter(pagos);
                     recyclerView.setAdapter(pagosAdapter);
                 }
