@@ -24,7 +24,7 @@ public class InmuebleFragment extends Fragment {
     private ImageView foto;
     private CheckBox disponible;
     private InmuebleViewModel vm;
-    private Button contratos;
+    private Button contratos,pagos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +42,7 @@ public class InmuebleFragment extends Fragment {
         foto=v.findViewById(R.id.ivFoto);
         disponible=v.findViewById(R.id.cbDisponible);
         contratos=v.findViewById(R.id.btContratos);
+        pagos=v.findViewById(R.id.btPagos);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmuebleViewModel.class);
         vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<Propiedad>() {
             @Override
@@ -59,6 +60,14 @@ public class InmuebleFragment extends Fragment {
                         Bundle bundle= new Bundle();
                         bundle.putSerializable("inmueble", propiedad);
                         Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_contratos,bundle);
+                    }
+                });
+                pagos.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle= new Bundle();
+                        bundle.putSerializable("inmueble", propiedad);
+                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_pagos,bundle);
                     }
                 });
             }

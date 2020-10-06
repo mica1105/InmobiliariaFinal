@@ -74,17 +74,4 @@
         android:textStyle="bold"
         android:textSize="20dp"/>
 
-    <Button
-        android:id="@+id/btPagos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginLeft="70dp"
-        android:elevation="5dp"
-        android:background="@drawable/btn_fondocolor"
-        android:text="Ver Pagos"
-        android:textSize="16sp"
-        android:textColor="#fff"
-        />
 </LinearLayout>

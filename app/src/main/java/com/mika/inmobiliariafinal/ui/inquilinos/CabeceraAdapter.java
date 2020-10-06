@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -24,6 +25,7 @@ public class CabeceraAdapter extends RecyclerView.Adapter<CabeceraAdapter.MyView
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public EditText nombre, dni, telefono, email;
+        public TextView domicilio;
         public CardView cardView;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -31,6 +33,7 @@ public class CabeceraAdapter extends RecyclerView.Adapter<CabeceraAdapter.MyView
             dni=itemView.findViewById(R.id.etDniInq);
             telefono=itemView.findViewById(R.id.etTelInqui);
             email=itemView.findViewById(R.id.etEmailInqui);
+            domicilio=itemView.findViewById(R.id.tvDomicilio);
             cardView=itemView.findViewById(R.id.cvInquilinos);
         }
     }
@@ -54,6 +57,19 @@ public class CabeceraAdapter extends RecyclerView.Adapter<CabeceraAdapter.MyView
         holder.dni.setText(myDataset.get(position).getDni());
         holder.telefono.setText(myDataset.get(position).getTelefono());
         holder.email.setText(myDataset.get(position).getEmail());
+        switch (position){
+            case 0: {
+                holder.domicilio.setText("España 742");
+                break;}
+            case 1:{
+                holder.domicilio.setText("Av. Centenario 429");
+                break;
+            }
+            case 2:{
+                holder.domicilio.setText("Av.Illia 746");
+                break;
+            }
+        }
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

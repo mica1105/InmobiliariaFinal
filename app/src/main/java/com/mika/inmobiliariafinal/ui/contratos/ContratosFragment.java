@@ -1,31 +1,32 @@
 package com.mika.inmobiliariafinal.ui.contratos;
 
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import androidx.navigation.Navigation;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.mika.inmobiliariafinal.R;
 import com.mika.inmobiliariafinal.modelo.Contrato;
 import com.mika.inmobiliariafinal.modelo.Propiedad;
-import com.mika.inmobiliariafinal.ui.perfil.PerfilViewModel;
-import com.mika.inmobiliariafinal.ui.propiedades.InmuebleFragment;
-import com.mika.inmobiliariafinal.ui.propiedades.PropiedadesFragment;
-import com.mika.inmobiliariafinal.ui.propiedades.PropiedadesViewModel;
+import com.mika.inmobiliariafinal.ui.Adapter.ViewPageAdapter;
+import com.mika.inmobiliariafinal.ui.Adapter.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +34,9 @@ import java.util.List;
 public class ContratosFragment extends Fragment {
 
     private ContratosViewModel vm;
-    private ViewPager viewPager;
+    private ViewPager2 viewPager;
     private TabLayout tabLayout;
-    private AppBarLayout appBar;
-
+    private ViewPageAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -48,23 +48,25 @@ public class ContratosFragment extends Fragment {
 
     public void inicializar(View v){
         viewPager= v.findViewById(R.id.vpContratos);
-        appBar=v.findViewById(R.id.appBarContratos);
-        tabLayout= new TabLayout(getContext());
-        appBar.addView(tabLayout);
+        tabLayout=v.findViewById(R.id.tlContratos);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratosViewModel.class);
-        final ContratosFragment.ViewPageAdapter adapter = new ContratosFragment.ViewPageAdapter(getParentFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        adapter= new ViewPageAdapter(getParentFragmentManager(),getLifecycle());
         if(getArguments() != null){
             vm.getAlquiler().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
                 @Override
                 public void onChanged(Contrato contrato) {
-                    String titulo = contrato.getId() + "";
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("contrato", contrato);
                     ContratoFragment fragment = new ContratoFragment();
                     fragment.setArguments(bundle);
-                    adapter.addFragment(fragment, "Contrato" + titulo);
+                    adapter.addFragment(fragment);
                     viewPager.setAdapter(adapter);
-                    tabLayout.setupWithViewPager(viewPager);
+                    new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+                        @Override
+                        public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                            tab.setText("Contrato "+(position+1));
+                        }
+                    }).attach();
                 }
             });
             vm.recuperarContrato(getArguments());
@@ -73,50 +75,23 @@ public class ContratosFragment extends Fragment {
                 @Override
                 public void onChanged(ArrayList<Contrato> contratos) {
                     for (Contrato contrato : contratos) {
-                        String titulo = contrato.getId() + "";
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("contrato", contrato);
                         ContratoFragment fragment = new ContratoFragment();
                         fragment.setArguments(bundle);
-                        adapter.addFragment(fragment, "Contrato" + titulo);
+                        adapter.addFragment(fragment);
                     }
                     viewPager.setAdapter(adapter);
-                    tabLayout.setupWithViewPager(viewPager);
+                    viewPager.setPageTransformer(new ZoomOutPageTransformer());
+                    new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+                        @Override
+                        public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                            tab.setText("Contrato "+(position+1));
+                        }
+                    }).attach();
                 }
             });
             vm.recuperarContratos();
-        }
-    }
-
-    public class ViewPageAdapter extends FragmentPagerAdapter {
-
-        private List<Fragment> fragmentList= new ArrayList<>();
-        private List<String> titulosFragment= new ArrayList<>();
-
-        public ViewPageAdapter(@NonNull FragmentManager fm, int behavior) {
-            super(fm, behavior);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return fragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titulosFragment.get(position);
-        }
-
-        public void addFragment(Fragment fragment, String titulo){
-            fragmentList.add(fragment);
-            titulosFragment.add(titulo);
         }
     }
 }

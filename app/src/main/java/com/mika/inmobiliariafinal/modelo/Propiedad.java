@@ -12,7 +12,11 @@ public class Propiedad implements Serializable {
     private double precio;
     private boolean disponible;
 
-    public Propiedad(int id,int foto, String domicilio, int ambientes, String tipo, String uso, float precio, boolean disponible) {
+    public Propiedad(int id) {
+        this.id = id;
+    }
+
+    public Propiedad(int id, int foto, String domicilio, int ambientes, String tipo, String uso, float precio, boolean disponible) {
         this.id=id;
         this.foto= foto;
         this.domicilio = domicilio;

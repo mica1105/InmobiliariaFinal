@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mika.inmobiliariafinal.R;
 import com.mika.inmobiliariafinal.modelo.Contrato;
@@ -26,7 +27,7 @@ public class ContratoFragment extends Fragment {
 
     private ContratoViewModel vm;
     private TextView direccion, fechaInicio, fechaFin, precio;
-    private Button pagos;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -41,23 +42,14 @@ public class ContratoFragment extends Fragment {
         fechaInicio=v.findViewById(R.id.tvFechaInicio);
         fechaFin=v.findViewById(R.id.tvFechaFin);
         precio=v.findViewById(R.id.tvPrecio);
-        pagos=v.findViewById(R.id.btPagos);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratoViewModel.class);
         vm.getContrato().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
             @Override
             public void onChanged(final Contrato contrato) {
-                direccion.setText(contrato.getInmueble());
+                direccion.setText(contrato.getInmueble().getDomicilio());
                 precio.setText("$"+contrato.getPrecio());
                 fechaInicio.setText(contrato.getFechaInicio());
                 fechaFin.setText(contrato.getFechaFin());
-                pagos.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Bundle bundle= new Bundle();
-                        bundle.putSerializable("contrato",contrato);
-                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_pagos,bundle);
-                    }
-                });
             }
         });
         vm.cargarContrato(getArguments());

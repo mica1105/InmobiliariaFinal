@@ -5,16 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.contratos.ContratosFragment"
     android:orientation="vertical">
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarContratos"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tlContratos"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:background="#AFF8DB"
         android:theme="@style/AppTheme" />
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpContratos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

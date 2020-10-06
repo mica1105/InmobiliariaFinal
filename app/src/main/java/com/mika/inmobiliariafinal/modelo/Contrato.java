@@ -10,9 +10,9 @@ public class Contrato implements Serializable {
     private String fechaFin;
     private double precio;
     private int propietario;
-    private String inmueble;
+    private Propiedad inmueble;
 
-    public Contrato(int id, String fechaInicio, String fechaFin, double precio, int propietario, String inmueble) {
+    public Contrato(int id, String fechaInicio, String fechaFin, double precio, int propietario, Propiedad inmueble) {
         this.id = id;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -61,11 +61,11 @@ public class Contrato implements Serializable {
         this.precio = precio;
     }
 
-    public String getInmueble() {
+    public Propiedad getInmueble() {
         return inmueble;
     }
 
-    public void setInmueble(String inmueble) {
+    public void setInmueble(Propiedad inmueble) {
         this.inmueble = inmueble;
     }
 }

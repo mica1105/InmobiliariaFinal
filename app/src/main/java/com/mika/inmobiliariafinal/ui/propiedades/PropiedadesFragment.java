@@ -4,38 +4,32 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.mika.inmobiliariafinal.R;
 import com.mika.inmobiliariafinal.modelo.Propiedad;
-import com.mika.inmobiliariafinal.ui.perfil.PerfilViewModel;
+import com.mika.inmobiliariafinal.ui.Adapter.ViewPageAdapter;
+import com.mika.inmobiliariafinal.ui.Adapter.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PropiedadesFragment extends Fragment {
 
-    private ViewPager viewPager;
-    private AppBarLayout appBar;
+    private ViewPager2 viewPager;
     private TabLayout tabLayout;
     private PropiedadesViewModel vm;
-
+    private ViewPageAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,59 +40,29 @@ public class PropiedadesFragment extends Fragment {
 
     private void inicializar(View v){
         viewPager= v.findViewById(R.id.viewPager);
-        appBar=v.findViewById(R.id.appBar);
-        tabLayout= new TabLayout(getContext());
+        tabLayout= v.findViewById(R.id.tlPropiedades);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PropiedadesViewModel.class);
-        appBar.addView(tabLayout);
         vm.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Propiedad>>() {
             @Override
             public void onChanged(ArrayList<Propiedad> propiedads) {
-                ViewPageAdapter adapter= new ViewPageAdapter(getParentFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-                int numero = 0;
-                for(Propiedad inmueble :propiedads) {
-                    numero ++;
+                adapter= new ViewPageAdapter(getParentFragmentManager(),getLifecycle());
+                for(final Propiedad inmueble :propiedads) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("inmueble",inmueble);
                     InmuebleFragment fragment= new InmuebleFragment();
                     fragment.setArguments(bundle);
-                    adapter.addFragment(fragment,"Inmueble"+numero);
+                    adapter.addFragment(fragment);
                 }
                 viewPager.setAdapter(adapter);
-                tabLayout.setupWithViewPager(viewPager);
+                viewPager.setPageTransformer(new ZoomOutPageTransformer());
+                new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+                    @Override
+                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                        tab.setText("Inmueble "+(position+1));
+                    }
+                }).attach();
             }
         });
         vm.recuperarPropiedades();
-    }
-
-    public class ViewPageAdapter extends FragmentPagerAdapter{
-
-        private List<Fragment> fragmentList= new ArrayList<>();
-        private List<String> titulosFragment= new ArrayList<>();
-
-        public ViewPageAdapter(@NonNull FragmentManager fm, int behavior) {
-            super(fm, behavior);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return fragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titulosFragment.get(position);
-        }
-
-        public void addFragment(Fragment fragment, String titulo){
-            fragmentList.add(fragment);
-            titulosFragment.add(titulo);
-        }
     }
 }

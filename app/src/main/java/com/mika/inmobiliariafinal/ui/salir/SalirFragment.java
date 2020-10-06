@@ -4,6 +4,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -31,34 +33,27 @@ public class SalirFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root= inflater.inflate(R.layout.fragment_salir, container, false);
-        inicializar(root);
+        mostrarDialogo(root);
         return root;
     }
 
-    public void inicializar(View v) {
-        mensaje=v.findViewById(R.id.tvSalir);
-        salir=v.findViewById(R.id.btSalir);
-        volver=v.findViewById(R.id.btVolver);
-        vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(SalirViewModel.class);
-        vm.getMensaje().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                mensaje.setText(s);
-            }
-        });
-        vm.mostrarMensaje();
-        salir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent= new Intent(getContext(), Login.class);
-                startActivity(intent);
-            }
-        });
-        volver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_perfil);
-            }
-        });
+    public void mostrarDialogo(View v){
+        new AlertDialog.Builder(getContext())
+                .setTitle("Salida")
+                .setMessage("¿Esta seguro que desea \n cerrar sesión?")
+                .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        System.exit(0);
+                    }
+                })
+                .setNegativeButton("Volver", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_perfil);
+                    }
+                })
+                .show();
+
     }
 }

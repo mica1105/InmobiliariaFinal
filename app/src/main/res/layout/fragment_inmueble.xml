@@ -163,7 +163,7 @@
     <ImageView
         android:id="@+id/ivFoto"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:layout_marginTop="2dp"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintEnd_toEndOf="parent"
@@ -172,17 +172,30 @@
 
     <Button
         android:id="@+id/btContratos"
-        android:layout_width="220dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/btn_fondocolor"
         android:elevation="5dp"
         android:text="Ver Contratos"
         android:textColor="#fff"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivFoto" />
+
+    <Button
+        android:id="@+id/btPagos"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/btn_fondocolor"
+        android:elevation="5dp"
+        android:text="Ver Pagos"
+        android:textColor="#fff"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivFoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
