@@ -54,6 +54,10 @@ public class InmuebleFragment extends Fragment {
                 precio.setText("$"+propiedad.getPrecio());
                 foto.setImageResource(propiedad.getFoto());
                 disponible.setChecked(propiedad.isDisponible());
+                if(propiedad.isDisponible()==true){
+                    contratos.setVisibility(View.GONE);
+                    pagos.setVisibility(View.GONE);
+                }
                 contratos.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
