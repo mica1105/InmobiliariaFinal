@@ -1,5 +1,6 @@
 package com.mika.inmobiliariafinal.ui.pagos;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -38,6 +39,13 @@ public class PagosFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root= inflater.inflate(R.layout.fragment_pagos, container, false);
         inicializar(root);
+        OnBackPressedCallback callback= new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_propiedades);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),callback);
         return root;
     }
 

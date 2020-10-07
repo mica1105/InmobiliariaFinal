@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModelProviders;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +28,7 @@ import com.mika.inmobiliariafinal.R;
 
 public class SalirFragment extends Fragment {
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -35,21 +39,20 @@ public class SalirFragment extends Fragment {
 
     public void mostrarDialogo(View v){
         new AlertDialog.Builder(getContext())
-                .setTitle("Salida")
-                .setMessage("¿Esta seguro que desea \n cerrar sesión?")
-                .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+           .setTitle("Salida")
+                .setMessage("¿Esta seguro que desea cerrar sesión?")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         System.exit(0);
                     }
                 })
-                .setNegativeButton("Volver", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_perfil);
                     }
                 })
                 .show();
-
     }
 }

@@ -33,6 +33,7 @@ public class LoginViewModel extends AndroidViewModel
         String password="mika";
         if (usuario.equals(u)  && password.equals(c)){
          Intent intent= new Intent(context, MainActivity.class);
+         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
          context.startActivity(intent);
         }else{
             error.setValue("La clave o contraseña son incorrectas");

@@ -1,5 +1,6 @@
 package com.mika.inmobiliariafinal.ui.contratos;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
@@ -44,6 +45,13 @@ public class ContratosFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root=inflater.inflate(R.layout.fragment_contratos, container, false);
         inicializar(root);
+        OnBackPressedCallback callback= new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_propiedades);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),callback);
         return root;
     }
 
@@ -56,7 +64,7 @@ public class ContratosFragment extends Fragment {
 
             vm.getAlquiler().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
                 @Override
-                public void onChanged(Contrato contrato) {
+                public void onChanged(final Contrato contrato) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("contrato", contrato);
                     ContratoFragment fragment = new ContratoFragment();
@@ -66,7 +74,7 @@ public class ContratosFragment extends Fragment {
                     new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
                         @Override
                         public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                            tab.setText("Contrato "+(position+1));
+                            tab.setText("Contrato "+contrato.getId());
                         }
                     }).attach();
                 }

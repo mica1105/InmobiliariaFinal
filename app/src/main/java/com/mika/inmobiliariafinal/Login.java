@@ -43,11 +43,5 @@ public class Login extends AppCompatActivity {
                 login.autenticacion(usuario.getText().toString(),clave.getText().toString());
             }
         });
-
-    }
-    public void inciarSesion(View v){
-        login.autenticacion(usuario.getText().toString(),clave.getText().toString());
-        //Intent intent= new Intent(this,MainActivity.class);
-        //startActivity(intent);
     }
 }
