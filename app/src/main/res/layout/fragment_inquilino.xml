@@ -120,6 +120,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:enabled="false"
+        android:textColor="@color/black"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/tvI1"
         app:layout_constraintTop_toBottomOf="@+id/tvInquilino" />
@@ -133,6 +134,7 @@
         android:ems="10"
         android:inputType="number"
         android:enabled="false"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/tvI2"
         app:layout_constraintTop_toBottomOf="@+id/etNombreInquilino" />
 
@@ -144,6 +146,7 @@
         android:layout_marginTop="2dp"
         android:ems="10"
         android:enabled="false"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/tvI3"
         app:layout_constraintTop_toBottomOf="@+id/etDniInquilino" />
 
@@ -156,6 +159,7 @@
         android:ems="10"
         android:inputType="number"
         android:enabled="false"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/tvI4"
         app:layout_constraintTop_toBottomOf="@+id/etTrabajo" />
 
@@ -168,6 +172,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:enabled="false"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/tvI5"
         app:layout_constraintTop_toBottomOf="@+id/etTelefonoInquilino" />
 
@@ -178,6 +183,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:textColor="@color/black"
         android:inputType="textPersonName"
         android:enabled="false"
         app:layout_constraintStart_toEndOf="@+id/tvG1"
@@ -191,6 +197,7 @@
         android:layout_marginTop="2dp"
         android:ems="10"
         android:enabled="false"
+        android:textColor="@color/black"
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/tvG2"
         app:layout_constraintTop_toBottomOf="@+id/etNombreGarante" />
@@ -202,6 +209,7 @@
         android:layout_marginStart="27dp"
         android:layout_marginTop="2dp"
         android:ems="10"
+        android:textColor="@color/black"
         android:inputType="number" android:enabled="false"
         app:layout_constraintStart_toEndOf="@+id/tvG3"
         app:layout_constraintTop_toBottomOf="@+id/etDniGarante" />
