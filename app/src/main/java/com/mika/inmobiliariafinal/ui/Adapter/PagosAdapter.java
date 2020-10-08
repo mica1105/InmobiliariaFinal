@@ -1,4 +1,4 @@
-package com.mika.inmobiliariafinal.ui.pagos;
+package com.mika.inmobiliariafinal.ui.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

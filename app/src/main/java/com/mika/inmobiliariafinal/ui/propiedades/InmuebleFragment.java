@@ -71,7 +71,7 @@ public class InmuebleFragment extends Fragment {
                     public void onClick(View view) {
                         Bundle bundle= new Bundle();
                         bundle.putSerializable("inmueble", propiedad);
-                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.nav_pagos,bundle);
+                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.pagoFragment,bundle);
                     }
                 });
             }

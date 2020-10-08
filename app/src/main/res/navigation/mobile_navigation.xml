@@ -23,8 +23,8 @@
             app:popUpTo="@id/nav_propiedades"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/action_nav_propiedades_to_nav_pagos2"
-            app:destination="@id/nav_pagos"
+            android:id="@+id/action_nav_propiedades_to_pagoFragment"
+            app:destination="@id/pagoFragment"
             app:popUpTo="@id/nav_propiedades"
             app:popUpToInclusive="false" />
     </fragment>
@@ -36,13 +36,20 @@
         tools:layout="@layout/fragment_inquilinos" >
         <action
             android:id="@+id/action_nav_inquilinos_to_inquilinoFragment"
-            app:destination="@id/inquilinoFragment" />
+            app:destination="@id/inquilinoFragment"
+            app:popUpTo="@id/nav_inquilinos" />
     </fragment>
     <fragment
         android:id="@+id/nav_pagos"
         android:name="com.mika.inmobiliariafinal.ui.pagos.PagosFragment"
         android:label="@string/menu_pagos"
-        tools:layout="@layout/fragment_pagos" />
+        tools:layout="@layout/fragment_pagos" >
+        <action
+            android:id="@+id/action_nav_pagos_to_pagoFragment"
+            app:destination="@id/pagoFragment"
+            app:popUpTo="@id/nav_pagos"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/nav_contratos"
         android:name="com.mika.inmobiliariafinal.ui.contratos.ContratosFragment"
@@ -57,14 +64,15 @@
         android:id="@+id/inquilinoFragment"
         android:name="com.mika.inmobiliariafinal.ui.inquilinos.InquilinoFragment"
         android:label="@string/menu_inquilino"
-        tools:layout="@layout/fragment_inquilino" >
-        <action
-            android:id="@+id/action_inquilinoFragment_to_nav_inquilinos"
-            app:destination="@id/nav_inquilinos" />
-    </fragment>
+        tools:layout="@layout/fragment_inquilino" />
     <fragment
         android:id="@+id/contratoFragment"
         android:name="com.mika.inmobiliariafinal.ui.contratos.ContratoFragment"
         android:label="fragment_contrato"
         tools:layout="@layout/fragment_contrato" />
+    <fragment
+        android:id="@+id/pagoFragment"
+        android:name="com.mika.inmobiliariafinal.ui.pagos.PagoFragment"
+        android:label="fragment_pago"
+        tools:layout="@layout/fragment_pago" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.mika.inmobiliariafinal.ui.inquilinos;
+package com.mika.inmobiliariafinal.ui.Adapter;
 
 import android.app.Activity;
 import android.os.Bundle;

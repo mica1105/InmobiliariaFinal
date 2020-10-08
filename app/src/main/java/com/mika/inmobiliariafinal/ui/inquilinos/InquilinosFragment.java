@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mika.inmobiliariafinal.R;
 import com.mika.inmobiliariafinal.modelo.Inquilino;
+import com.mika.inmobiliariafinal.ui.Adapter.CabeceraAdapter;
 
 import java.util.ArrayList;
 
