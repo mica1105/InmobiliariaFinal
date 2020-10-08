@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.contratos.ContratoFragment"
     android:orientation="vertical"
-    android:background="@drawable/fondo1">
+    android:gravity="center"
+    android:background="@drawable/fondo_contratos">
 
     <TextView
         android:id="@+id/tvDireccion"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:background="#AFF8BD"
         android:text="Dirección"
         android:textAlignment="center"
@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="Fecha de Inicio"
         android:textAlignment="center"
         android:textSize="18dp"
@@ -40,7 +40,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="Fecha de Finalización"
         android:textAlignment="center"
         android:textSize="18dp"
@@ -58,7 +58,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="Precio Mensual"
         android:textAlignment="center"
         android:textSize="18dp"
