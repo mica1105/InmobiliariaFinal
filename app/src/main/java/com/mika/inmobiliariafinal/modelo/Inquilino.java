@@ -7,25 +7,25 @@ public class Inquilino implements Serializable {
     private String nombre;
     private String apellido;
     private String dni;
-    private String lugarDeTrabajo;
+    private String lugarTrabajo;
     private String telefono;
     private String email;
     private String nombreGarante;
     private String dniGarante;
-    private String telGarante;
+    private String telefonoGarante;
 
-    public Inquilino(int id, String nombre, String apellido, String dni, String lugarDeTrabajo, String telefono, String email,
-                     String nombreGarante, String dniGarante, String telGarante) {
+    public Inquilino(int id, String nombre, String apellido, String dni, String lugarTrabajo, String telefono, String email,
+                     String nombreGarante, String dniGarante, String telefonoGarante) {
         this.id=id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.lugarDeTrabajo = lugarDeTrabajo;
+        this.lugarTrabajo = lugarTrabajo;
         this.telefono = telefono;
         this.email = email;
         this.nombreGarante = nombreGarante;
         this.dniGarante = dniGarante;
-        this.telGarante = telGarante;
+        this.telefonoGarante = telefonoGarante;
     }
 
     public int getId() {
@@ -60,12 +60,12 @@ public class Inquilino implements Serializable {
         this.dni = dni;
     }
 
-    public String getLugarDeTrabajo() {
-        return lugarDeTrabajo;
+    public String getLugarTrabajo() {
+        return lugarTrabajo;
     }
 
-    public void setLugarDeTrabajo(String lugarDeTrabajo) {
-        this.lugarDeTrabajo = lugarDeTrabajo;
+    public void setLugarTrabajo(String lugarDeTrabajo) {
+        this.lugarTrabajo = lugarDeTrabajo;
     }
 
     public String getTelefono() {
@@ -100,11 +100,11 @@ public class Inquilino implements Serializable {
         this.dniGarante = dniGarante;
     }
 
-    public String getTelGarante() {
-        return telGarante;
+    public String getTelefonoGarante() {
+        return telefonoGarante;
     }
 
-    public void setTelGarante(String telGarante) {
-        this.telGarante = telGarante;
+    public void setTelefonoGarante(String telefonoGarante) {
+        this.telefonoGarante = telefonoGarante;
     }
 }

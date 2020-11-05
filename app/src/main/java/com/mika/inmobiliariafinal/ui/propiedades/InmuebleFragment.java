@@ -1,5 +1,7 @@
 package com.mika.inmobiliariafinal.ui.propiedades;
 
+import android.graphics.Bitmap;
+import android.graphics.Path;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,12 +17,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.mika.inmobiliariafinal.R;
-import com.mika.inmobiliariafinal.modelo.Propiedad;
+import com.mika.inmobiliariafinal.modelo.Inmueble;
 
 public class InmuebleFragment extends Fragment {
 
-    private EditText domicilio, ambietes, tipo,uso,precio;
+    private EditText domicilio, ambientes, tipo,uso,precio;
     private ImageView foto;
     private CheckBox disponible;
     private InmuebleViewModel vm;
@@ -35,7 +38,7 @@ public class InmuebleFragment extends Fragment {
     }
     public void inicializar(View v){
         domicilio= v.findViewById(R.id.etDireccion);
-        ambietes=v.findViewById(R.id.etAmbientes);
+        ambientes=v.findViewById(R.id.etAmbientes);
         tipo=v.findViewById(R.id.etTipo);
         uso=v.findViewById(R.id.etUso);
         precio=v.findViewById(R.id.etPrecio);
@@ -44,20 +47,30 @@ public class InmuebleFragment extends Fragment {
         contratos=v.findViewById(R.id.btContratos);
         pagos=v.findViewById(R.id.btPagos);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmuebleViewModel.class);
-        vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<Propiedad>() {
+        vm.getDisponible().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
-            public void onChanged(final Propiedad propiedad) {
-                domicilio.setText(propiedad.getDomicilio());
-                ambietes.setText(propiedad.getAmbientes()+"");
+            public void onChanged(Boolean aBoolean) {
+                disponible.setChecked(aBoolean);
+            }
+        });
+        vm.getUrl().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Glide.with(getContext())
+                        .load(s)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .fitCenter()
+                        .into(foto);
+            }
+        });
+        vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<Inmueble>() {
+            @Override
+            public void onChanged(final Inmueble propiedad) {
+                domicilio.setText(propiedad.getDireccion());
+                ambientes.setText(propiedad.getAmbientes()+"");
                 tipo.setText(propiedad.getTipo());
                 uso.setText(propiedad.getUso());
                 precio.setText("$"+propiedad.getPrecio());
-                foto.setImageResource(propiedad.getFoto());
-                disponible.setChecked(propiedad.isDisponible());
-                if(propiedad.isDisponible()==true){
-                    contratos.setVisibility(View.GONE);
-                    pagos.setVisibility(View.GONE);
-                }
                 contratos.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -1,6 +1,7 @@
 package com.mika.inmobiliariafinal.ui.Adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +14,19 @@ import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.mika.inmobiliariafinal.R;
-import com.mika.inmobiliariafinal.modelo.Inquilino;
-import com.mika.inmobiliariafinal.modelo.Propiedad;
+import com.mika.inmobiliariafinal.modelo.Inmueble;
 
 import java.util.ArrayList;
 
 public class InmueblesAdapter extends RecyclerView.Adapter<InmueblesAdapter.MyViewHolder> {
-    private ArrayList<Propiedad> myDataset;
+    private ArrayList<Inmueble> myDataset;
+    private Context context;
 
-    public InmueblesAdapter(ArrayList<Propiedad> myDataset) {
+    public InmueblesAdapter(ArrayList<Inmueble> myDataset, Context context) {
         this.myDataset = myDataset;
+        this.context= context;
     }
 
     @NonNull
@@ -36,9 +39,14 @@ public class InmueblesAdapter extends RecyclerView.Adapter<InmueblesAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final Propiedad inmueble = myDataset.get(position);
-        holder.imagen.setImageResource(myDataset.get(position).getFoto());
-        holder.direccion.setText(myDataset.get(position).getDomicilio());
+        final Inmueble inmueble = myDataset.get(position);
+        String url="http://192.168.1.111:45455";
+        Glide.with(context)
+                .load(url+myDataset.get(position).getImagen())
+                .placeholder(R.drawable.ic_launcher_background)
+                .fitCenter()
+                .into(holder.imagen);
+        holder.direccion.setText(myDataset.get(position).getDireccion());
         holder.mostrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

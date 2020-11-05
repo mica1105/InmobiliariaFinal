@@ -1,37 +1,30 @@
 package com.mika.inmobiliariafinal.ui.contratos;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.mika.inmobiliariafinal.R;
 import com.mika.inmobiliariafinal.modelo.Contrato;
-import com.mika.inmobiliariafinal.modelo.Propiedad;
+import com.mika.inmobiliariafinal.modelo.Inmueble;
 import com.mika.inmobiliariafinal.ui.Adapter.ViewPageAdapter;
 import com.mika.inmobiliariafinal.ui.Adapter.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ContratosFragment extends Fragment {
 
@@ -61,7 +54,6 @@ public class ContratosFragment extends Fragment {
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratosViewModel.class);
         adapter= new ViewPageAdapter(getParentFragmentManager(),getLifecycle());
         if(getArguments() != null){
-
             vm.getAlquiler().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
                 @Override
                 public void onChanged(final Contrato contrato) {
@@ -79,8 +71,9 @@ public class ContratosFragment extends Fragment {
                     }).attach();
                 }
             });
-            vm.recuperarContrato(getArguments());
-        }else {
+            vm.recuperarAlquiler(getArguments());
+        }
+        else {
             vm.getContratos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Contrato>>() {
                 @Override
                 public void onChanged(ArrayList<Contrato> contratos) {
@@ -96,12 +89,12 @@ public class ContratosFragment extends Fragment {
                     new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
                         @Override
                         public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                            tab.setText("Contrato "+(position+1));
+                            tab.setText("Contrato " + (position + 1));
                         }
                     }).attach();
                 }
             });
             vm.recuperarContratos();
         }
+        }
     }
-}

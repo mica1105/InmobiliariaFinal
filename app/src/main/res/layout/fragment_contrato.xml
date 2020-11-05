@@ -24,6 +24,7 @@
         android:layout_marginTop="16dp"
         android:text="Fecha de Inicio"
         android:textAlignment="center"
+        android:inputType="date"
         android:textSize="18dp"
         android:textStyle="bold"
         />
@@ -34,6 +35,7 @@
         android:layout_marginTop="10dp"
         android:text="Aqui Fecha"
         android:textAlignment="center"
+        android:inputType="date"
         android:textColor="#6eb5ff"
         android:textStyle="bold"
         android:textSize="20dp"/>

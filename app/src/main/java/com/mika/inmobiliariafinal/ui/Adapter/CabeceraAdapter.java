@@ -1,12 +1,15 @@
 package com.mika.inmobiliariafinal.ui.Adapter;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,16 +17,22 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mika.inmobiliariafinal.R;
+import com.mika.inmobiliariafinal.modelo.Inmueble;
 import com.mika.inmobiliariafinal.modelo.Inquilino;
+import com.mika.inmobiliariafinal.request.ApiClient;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CabeceraAdapter extends RecyclerView.Adapter<CabeceraAdapter.MyViewHolder>  {
 
     private ArrayList<Inquilino> myDataset;
-
+    private Context context;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+
         public EditText nombre, dni, telefono, email;
         public TextView domicilio;
         public CardView cardView;
@@ -38,8 +47,9 @@ public class CabeceraAdapter extends RecyclerView.Adapter<CabeceraAdapter.MyView
         }
     }
 
-    public CabeceraAdapter(ArrayList<Inquilino> myDataset) {
+    public CabeceraAdapter(ArrayList<Inquilino> myDataset, Context context) {
         this.myDataset = myDataset;
+        this.context= context;
     }
 
     @NonNull
@@ -57,19 +67,27 @@ public class CabeceraAdapter extends RecyclerView.Adapter<CabeceraAdapter.MyView
         holder.dni.setText(myDataset.get(position).getDni());
         holder.telefono.setText(myDataset.get(position).getTelefono());
         holder.email.setText(myDataset.get(position).getEmail());
-        switch (position){
-            case 0: {
-                holder.domicilio.setText("España 742");
-                break;}
-            case 1:{
-                holder.domicilio.setText("Av. Centenario 429");
-                break;
+
+        SharedPreferences sp =  context.getSharedPreferences("datos", 0);
+        String token= sp.getString("token","-1");
+        String id= myDataset.get(position).getId()+"";
+        Call<Inmueble> dato= ApiClient.getMyApiClient().inmueblePorInquilino(token,id);
+        dato.enqueue(new Callback<Inmueble>() {
+            @Override
+            public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
+                if(response.isSuccessful()){
+                    holder.domicilio.setText(response.body().getDireccion());
+                }else {
+                    holder.domicilio.setText("No se recupero");
+                }
             }
-            case 2:{
-                holder.domicilio.setText("Av.Illia 746");
-                break;
+
+            @Override
+            public void onFailure(Call<Inmueble> call, Throwable t) {
+                Toast.makeText(context,t.getMessage(),Toast.LENGTH_SHORT).show();
             }
-        }
+        });
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

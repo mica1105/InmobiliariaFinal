@@ -48,8 +48,8 @@ public class PerfilFragment extends Fragment {
                 etApellido.setText(propietario.getApellido());
                 etNombre.setText(propietario.getNombre());
                 etTelefono.setText(propietario.getTelefono());
-                etEmail.setText(propietario.getMail());
-                etPassword.setText(propietario.getPassword());
+                etEmail.setText(propietario.getEmail());
+                etPassword.setText(propietario.getClave());
             }
         });
         vm.recuperarPropietario();
@@ -61,8 +61,6 @@ public class PerfilFragment extends Fragment {
                 etApellido.setEnabled(true);
                 etNombre.setEnabled(true);
                 etTelefono.setEnabled(true);
-                etEmail.setEnabled(true);
-                etPassword.setEnabled(true);
                 btEditar.setVisibility(View.GONE);
                 btAceptar.setVisibility(View.VISIBLE);
             }
@@ -70,12 +68,13 @@ public class PerfilFragment extends Fragment {
         btAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                vm.editarPropietario(etNombre.getText().toString(), etApellido.getText().toString(),
+                        etDni.getText().toString(),etTelefono.getText().toString(),etEmail.getText().toString(),
+                        etPassword.getText().toString());
                 etDni.setEnabled(false);
                 etApellido.setEnabled(false);
                 etNombre.setEnabled(false);
                 etTelefono.setEnabled(false);
-                etEmail.setEnabled(false);
-                etPassword.setEnabled(false);
                 btEditar.setVisibility(View.VISIBLE);
                 btAceptar.setVisibility(View.GONE);
             }

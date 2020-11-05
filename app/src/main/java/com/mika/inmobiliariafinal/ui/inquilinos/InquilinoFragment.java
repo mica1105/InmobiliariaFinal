@@ -46,12 +46,12 @@ public class InquilinoFragment extends Fragment {
             public void onChanged(Inquilino inquilino) {
                nombre.setText(inquilino.getNombre());
                dni.setText(inquilino.getDni());
-               trabajo.setText(inquilino.getLugarDeTrabajo());
+               trabajo.setText(inquilino.getLugarTrabajo());
                telefono.setText(inquilino.getTelefono());
                email.setText(inquilino.getEmail());
                garante.setText(inquilino.getNombreGarante());
                dniGarante.setText(inquilino.getDniGarante());
-               telefonoGarante.setText(inquilino.getTelGarante());
+               telefonoGarante.setText(inquilino.getTelefonoGarante());
             }
         });
 

@@ -28,7 +28,6 @@ public class ViewPageAdapter extends FragmentStateAdapter {
         return fragmentList.size();
     }
 
-
     public void addFragment(Fragment fragment){
         fragmentList.add(fragment);
     }

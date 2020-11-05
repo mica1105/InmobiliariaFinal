@@ -7,22 +7,18 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.mika.inmobiliariafinal.R;
-import com.mika.inmobiliariafinal.modelo.Propiedad;
+import com.mika.inmobiliariafinal.modelo.Inmueble;
 import com.mika.inmobiliariafinal.ui.Adapter.ViewPageAdapter;
 import com.mika.inmobiliariafinal.ui.Adapter.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PropiedadesFragment extends Fragment {
 
@@ -42,11 +38,11 @@ public class PropiedadesFragment extends Fragment {
         viewPager= v.findViewById(R.id.viewPager);
         tabLayout= v.findViewById(R.id.tlPropiedades);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PropiedadesViewModel.class);
-        vm.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Propiedad>>() {
+        vm.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
             @Override
-            public void onChanged(ArrayList<Propiedad> propiedads) {
+            public void onChanged(ArrayList<Inmueble> propiedads) {
                 adapter= new ViewPageAdapter(getParentFragmentManager(),getLifecycle());
-                for(final Propiedad inmueble :propiedads) {
+                for(final Inmueble inmueble :propiedads) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("inmueble",inmueble);
                     InmuebleFragment fragment= new InmuebleFragment();

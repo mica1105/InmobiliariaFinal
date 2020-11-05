@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class Pago implements Serializable {
     private int id;
-    private int pago;
+    private int nroPago;
     private String fecha;
     private double importe;
-    private Contrato contrato;
+    private int contratoId;
 
-    public Pago(int id, int pago, String fecha, double importe, Contrato contrato) {
+    public Pago(int id, int nroPago, String fecha, double importe, int contratoId) {
         this.id = id;
-        this.pago = pago;
+        this.nroPago = nroPago;
         this.fecha = fecha;
         this.importe = importe;
-        this.contrato = contrato;
+        this.contratoId = contratoId;
     }
 
     public int getId() {
@@ -26,11 +26,11 @@ public class Pago implements Serializable {
     }
 
     public int getPago() {
-        return pago;
+        return nroPago;
     }
 
-    public void setPago(int pago) {
-        this.pago = pago;
+    public void setPago(int nroPago) {
+        this.nroPago = nroPago;
     }
 
     public String getFecha() {
@@ -49,11 +49,11 @@ public class Pago implements Serializable {
         this.importe = importe;
     }
 
-    public Contrato getContrato() {
-        return contrato;
+    public int getContratoId() {
+        return contratoId;
     }
 
-    public void setContrato(Contrato contrato) {
-        this.contrato = contrato;
+    public void setContratoId(int contratoId) {
+        this.contratoId = contratoId;
     }
 }

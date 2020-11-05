@@ -6,17 +6,27 @@ public class Propietario {
     private  String apellido;
     private String nombre;
     private String telefono;
-    private String mail;
-    private String password;
+    private int estado;
+    private String email;
+    private String clave;
 
-    public Propietario(int id,String dni, String apellido, String nombre, String telefono, String mail, String password) {
+    public Propietario(int id,String dni, String apellido, String nombre, String telefono,int estado, String mail, String password) {
         this.id=id;
         this.dni= dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.telefono= telefono;
-        this.mail = mail;
-        this.password = password;
+        this.estado= estado;
+        this.email = mail;
+        this.clave = password;
+    }
+    public Propietario(String dni, String apellido, String nombre, String telefono, String mail, String password) {
+        this.dni= dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.telefono= telefono;
+        this.email = mail;
+        this.clave = password;
     }
 
     public int getId() {
@@ -59,19 +69,27 @@ public class Propietario {
         this.telefono = telefono;
     }
 
-    public String getMail() {
-        return mail;
+    public int getEstado() {
+        return estado;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String mail) {
+        this.email = mail;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 }

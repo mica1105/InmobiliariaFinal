@@ -1,16 +1,34 @@
 package com.mika.inmobiliariafinal.ui.inquilinos;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
+import com.mika.inmobiliariafinal.modelo.Inmueble;
 import com.mika.inmobiliariafinal.modelo.Inquilino;
+import com.mika.inmobiliariafinal.request.ApiClient;
 
 import java.util.ArrayList;
 
-public class InquilinosViewModel extends ViewModel {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class InquilinosViewModel extends AndroidViewModel {
 
     private MutableLiveData<ArrayList<Inquilino>> inquilinos;
+    private Context context;
+
+    public InquilinosViewModel(@NonNull Application application) {
+        super(application);
+        context= application.getApplicationContext();
+    }
 
     public LiveData<ArrayList<Inquilino>> getInquilinos() {
         if (inquilinos==null){
@@ -20,10 +38,24 @@ public class InquilinosViewModel extends ViewModel {
     }
 
     public void recuperarInquilinos(){
-        ArrayList<Inquilino> inquilinos1= new ArrayList<>();
-        inquilinos1.add(new Inquilino(1,"Daniel","Lucero","31956482","Domec","2664778899","dlucero@gmail.com","Alejandra Garcia","18456752","2664264158"));
-        inquilinos1.add(new Inquilino(2,"Jessica","Cabreras","36852168","Aiello","2665485133","jessi@gmail.com","Jorge Cabreras","16741235","2665412384"));
-        inquilinos1.add(new Inquilino(3,"Rodrigo","Garcia","28468752","Municipalidad","2665723174","rgarcia@gmail.com","Marta Garro","19645823","2664956123"));
-        inquilinos.setValue(inquilinos1);
+        SharedPreferences sp = context.getSharedPreferences("datos", 0);
+        final String token= sp.getString("token","-1");
+        Call<ArrayList<Inquilino>> lista= ApiClient.getMyApiClient().obtenerInquilinos(token);
+        lista.enqueue(new Callback<ArrayList<Inquilino>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Inquilino>> call, Response<ArrayList<Inquilino>> response) {
+                if (response.isSuccessful()){
+                    inquilinos.postValue(response.body());
+                }
+                else {
+                    Toast.makeText(context,"No se recuperaron inquilinos",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Inquilino>> call, Throwable t) {
+                Toast.makeText(context,t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

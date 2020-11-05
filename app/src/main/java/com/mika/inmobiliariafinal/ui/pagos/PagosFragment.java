@@ -1,7 +1,6 @@
 package com.mika.inmobiliariafinal.ui.pagos;
 
-import androidx.activity.OnBackPressedCallback;
-
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,8 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mika.inmobiliariafinal.R;
-import com.mika.inmobiliariafinal.modelo.Propiedad;
-import com.mika.inmobiliariafinal.ui.Adapter.CabeceraAdapter;
+import com.mika.inmobiliariafinal.modelo.Inmueble;
 import com.mika.inmobiliariafinal.ui.Adapter.InmueblesAdapter;
 
 import java.util.ArrayList;
@@ -43,10 +40,11 @@ public class PagosFragment extends Fragment {
         GridLayoutManager manager= new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PagosViewModel.class);
-        vm.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Propiedad>>() {
+        vm.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
             @Override
-            public void onChanged(ArrayList<Propiedad> propiedads) {
-                adapter= new InmueblesAdapter(propiedads);
+            public void onChanged(ArrayList<Inmueble> propiedads) {
+                Context context= getContext();
+                adapter= new InmueblesAdapter(propiedads, context);
                 recyclerView.setAdapter(adapter);
             }
         });

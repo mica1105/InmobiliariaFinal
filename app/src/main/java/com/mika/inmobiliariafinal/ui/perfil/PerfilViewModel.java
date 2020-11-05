@@ -1,15 +1,32 @@
 package com.mika.inmobiliariafinal.ui.perfil;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.Toast;
+
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.mika.inmobiliariafinal.modelo.Propietario;
+import com.mika.inmobiliariafinal.request.ApiClient;
 
-public class PerfilViewModel extends ViewModel {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class PerfilViewModel extends AndroidViewModel {
 
     private MutableLiveData<Propietario> propietario;
+    private Context context;
 
+    public PerfilViewModel(@NonNull Application application) {
+        super(application);
+        context= application.getApplicationContext();
+    }
 
 
     public LiveData<Propietario> getPropietario() {
@@ -20,7 +37,47 @@ public class PerfilViewModel extends ViewModel {
     }
 
     public void recuperarPropietario(){
-        Propietario p= new Propietario(5,"34921602","Dure","Micaela","2664540633","mika@gmail.com","mika");
-        propietario.setValue(p);
+        SharedPreferences sp = context.getSharedPreferences("datos", 0);
+        String token= sp.getString("token","-1");
+        Call<Propietario> usuario = ApiClient.getMyApiClient().obtenerPropietario(token);
+        usuario.enqueue(new Callback<Propietario>() {
+            @Override
+            public void onResponse(Call<Propietario> call, Response<Propietario> response) {
+                if(response.isSuccessful()){
+                    propietario.postValue(response.body());
+                }
+                if (response == null){
+                    Toast.makeText(context,"usuario nulo",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Propietario> call, Throwable t) {
+                Toast.makeText(context,t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+   public void editarPropietario(String n, String a, String dni, String tel, String email, String password){
+        SharedPreferences sp = context.getSharedPreferences("datos", 0);
+        String token= sp.getString("token","-1");
+        Propietario propietario1= new Propietario( dni,a,n, tel, email,password);
+        Call<Propietario> usuario= ApiClient.getMyApiClient().editarPropietario(token, propietario1);
+        usuario.enqueue(new Callback<Propietario>() {
+            @Override
+            public void onResponse(Call<Propietario> call, Response<Propietario> response) {
+                if(response.isSuccessful()){
+                    propietario.postValue(response.body());
+                    Toast.makeText(context,"usuario modificado con exito",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(context,"no se pudo editar el usuario",Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Propietario> call, Throwable t) {
+                Toast.makeText(context,t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

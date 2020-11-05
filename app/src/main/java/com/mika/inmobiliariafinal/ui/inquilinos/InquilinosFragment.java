@@ -1,5 +1,6 @@
 package com.mika.inmobiliariafinal.ui.inquilinos;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,8 @@ public class InquilinosFragment extends Fragment {
         vm.getInquilinos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inquilino>>() {
             @Override
             public void onChanged(final ArrayList<Inquilino> inquilinos) {
-                cabeceraAdapter= new CabeceraAdapter(inquilinos);
+                Context context= getContext();
+                cabeceraAdapter= new CabeceraAdapter(inquilinos, context);
                 recyclerView.setAdapter(cabeceraAdapter);
             }
         });

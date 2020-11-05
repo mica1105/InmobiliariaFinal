@@ -1,24 +1,26 @@
 package com.mika.inmobiliariafinal.modelo;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
 
 public class Contrato implements Serializable {
     private int id;
     private String fechaInicio;
     private String fechaFin;
     private double precio;
-    private int propietario;
-    private Propiedad inmueble;
+    private int inmuebleId;
+    private Inmueble inmueble;
+    private int inquilinoId;
+    private Inquilino inquilino;
 
-    public Contrato(int id, String fechaInicio, String fechaFin, double precio, int propietario, Propiedad inmueble) {
+    public Contrato(int id, String fechaInicio, String fechaFin, double precio, int inmuebleId, Inmueble inmueble, int inquilinoId, Inquilino inquilino) {
         this.id = id;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.precio = precio;
-        this.propietario = propietario;
-        this.inmueble = inmueble;
+        this.inmuebleId = inmuebleId;
+        this.inmueble= inmueble;
+        this.inquilinoId = inquilinoId;
+        this.inquilino= inquilino;
     }
 
     public int getId() {
@@ -45,14 +47,6 @@ public class Contrato implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public int getPropietario() {
-        return propietario;
-    }
-
-    public void setPropietario(int propietario) {
-        this.propietario = propietario;
-    }
-
     public double getPrecio() {
         return precio;
     }
@@ -61,11 +55,35 @@ public class Contrato implements Serializable {
         this.precio = precio;
     }
 
-    public Propiedad getInmueble() {
+    public int getInmuebleId() {
+        return inmuebleId;
+    }
+
+    public void setInmuebleId(int inmuebleId) {
+        this.inmuebleId = inmuebleId;
+    }
+
+    public int getInquilinoId() {
+        return inquilinoId;
+    }
+
+    public void setInquilinoId(int inquilinoId) {
+        this.inquilinoId = inquilinoId;
+    }
+
+    public Inmueble getInmueble() {
         return inmueble;
     }
 
-    public void setInmueble(Propiedad inmueble) {
+    public void setInmueble(Inmueble inmueble) {
         this.inmueble = inmueble;
+    }
+
+    public Inquilino getInquilino() {
+        return inquilino;
+    }
+
+    public void setInquilino(Inquilino inquilino) {
+        this.inquilino = inquilino;
     }
 }

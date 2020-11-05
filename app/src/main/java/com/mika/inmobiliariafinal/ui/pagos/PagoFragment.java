@@ -52,22 +52,20 @@ public class PagoFragment extends Fragment {
         LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PagoViewModel.class);
-        if(getArguments() != null) {
-            vm.getPagos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Pago>>() {
+        vm.getDireccion().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                direccion.setText(s);
+            }
+        });
+        vm.getPagos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Pago>>() {
                 @Override
                 public void onChanged(ArrayList<Pago> pagos) {
-                    for (Pago pago:pagos){
-                        direccion.setText(pago.getContrato().getInmueble().getDomicilio());
-                    }
                     pagosAdapter = new PagosAdapter(pagos);
                     recyclerView.setAdapter(pagosAdapter);
                 }
-            });
-            vm.recuperarPagos(getArguments());
-        }
-        else {
-            direccion.setText("Seleccione un Inmueble");
-        }
+        });
+        vm.recuperarPagos(getArguments());
     }
 
 }
