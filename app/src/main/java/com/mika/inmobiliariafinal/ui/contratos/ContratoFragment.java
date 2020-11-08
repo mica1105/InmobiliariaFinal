@@ -40,15 +40,10 @@ public class ContratoFragment extends Fragment {
         fechaFin=v.findViewById(R.id.tvFechaFin);
         precio=v.findViewById(R.id.tvPrecio);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratoViewModel.class);
-        vm.getDomicilio().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                direccion.setText(s);
-            }
-        });
         vm.getContrato().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
             @Override
             public void onChanged(final Contrato contrato) {
+                direccion.setText(contrato.getInmueble().getDireccion());
                 precio.setText("$"+contrato.getPrecio());
                 fechaInicio.setText(contrato.getFechaInicio());
                 fechaFin.setText(contrato.getFechaFin());

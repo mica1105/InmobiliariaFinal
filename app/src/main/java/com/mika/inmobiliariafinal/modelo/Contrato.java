@@ -18,9 +18,7 @@ public class Contrato implements Serializable {
         this.fechaFin = fechaFin;
         this.precio = precio;
         this.inmuebleId = inmuebleId;
-        this.inmueble= inmueble;
         this.inquilinoId = inquilinoId;
-        this.inquilino= inquilino;
     }
 
     public int getId() {

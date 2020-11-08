@@ -27,7 +27,7 @@ public class InmuebleFragment extends Fragment {
     private ImageView foto;
     private CheckBox disponible;
     private InmuebleViewModel vm;
-    private Button contratos,pagos;
+    private Button contratos,pagos,editar,aceptar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +44,8 @@ public class InmuebleFragment extends Fragment {
         precio=v.findViewById(R.id.etPrecio);
         foto=v.findViewById(R.id.ivFoto);
         disponible=v.findViewById(R.id.cbDisponible);
+        editar=v.findViewById(R.id.btModificar);
+        aceptar=v.findViewById(R.id.btComprobar);
         contratos=v.findViewById(R.id.btContratos);
         pagos=v.findViewById(R.id.btPagos);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmuebleViewModel.class);
@@ -71,6 +73,23 @@ public class InmuebleFragment extends Fragment {
                 tipo.setText(propiedad.getTipo());
                 uso.setText(propiedad.getUso());
                 precio.setText("$"+propiedad.getPrecio());
+                editar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        disponible.setEnabled(true);
+                        aceptar.setVisibility(View.VISIBLE);
+                        editar.setVisibility(View.GONE);
+                    }
+                });
+                aceptar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        vm.editarInmueble(propiedad, disponible.isChecked());
+                        disponible.setEnabled(false);
+                        editar.setVisibility(View.VISIBLE);
+                        aceptar.setVisibility(View.GONE);
+                    }
+                });
                 contratos.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

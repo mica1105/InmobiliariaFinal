@@ -53,28 +53,7 @@ public class ContratosFragment extends Fragment {
         tabLayout=v.findViewById(R.id.tlContratos);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratosViewModel.class);
         adapter= new ViewPageAdapter(getParentFragmentManager(),getLifecycle());
-        if(getArguments() != null){
-            vm.getAlquiler().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
-                @Override
-                public void onChanged(final Contrato contrato) {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("contrato", contrato);
-                    ContratoFragment fragment = new ContratoFragment();
-                    fragment.setArguments(bundle);
-                    adapter.addFragment(fragment);
-                    viewPager.setAdapter(adapter);
-                    new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-                        @Override
-                        public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                            tab.setText("Contrato "+contrato.getId());
-                        }
-                    }).attach();
-                }
-            });
-            vm.recuperarAlquiler(getArguments());
-        }
-        else {
-            vm.getContratos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Contrato>>() {
+        vm.getContratos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Contrato>>() {
                 @Override
                 public void onChanged(ArrayList<Contrato> contratos) {
                     for (Contrato contrato : contratos) {
@@ -93,8 +72,14 @@ public class ContratosFragment extends Fragment {
                         }
                     }).attach();
                 }
-            });
-            vm.recuperarContratos();
+        });
+        if(getArguments()== null){
+            Bundle bundle= new Bundle();
+            Inmueble inmueble= null;
+            bundle.putSerializable("inmueble",inmueble);
+           vm.recuperarContratos(bundle);
+        }else {
+            vm.recuperarContratos(getArguments());
         }
         }
     }

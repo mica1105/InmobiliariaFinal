@@ -24,7 +24,7 @@ import retrofit2.http.Path;
 
 public class ApiClient {
 
-    private static final String PATH= "http://192.168.1.111:45455/api/";
+    private static final String PATH= "http://192.168.43.54:45457/api/";
     private static MyApiInterface myApiInterface;
 
     public static MyApiInterface getMyApiClient(){
@@ -53,11 +53,11 @@ public class ApiClient {
         @GET("Inmueble/")
         Call<ArrayList<Inmueble>> obtenerPropiedades(@Header("Authorization") String authorization);
 
+        @PUT("Inmueble/{id}")
+        Call<Inmueble> editarInmueble(@Header("Authorization") String authorization, @Path("id") String id, @Body Inmueble inmueble);
+
         @GET("Inmueble/{id}")
         Call<Inmueble> obtenerInmueble(@Header("Authorization") String authorization, @Path("id") String id);
-
-        @GET("Inmueble/PorContrato/{id}")
-        Call<Inmueble> buscarInmueble(@Header("Authorization") String authorization, @Path("id") String id);
 
         @GET("Inmueble/PorInquilino/{id}")
         Call<Inmueble> inmueblePorInquilino(@Header("Authorization") String authorization, @Path("id") String id);
@@ -65,7 +65,7 @@ public class ApiClient {
         @GET("Inquilino/PorPropietario")
         Call<ArrayList<Inquilino>> obtenerInquilinos(@Header("Authorization") String authorization);
 
-        @GET("Contrato")
+        @GET("Contrato/Vigentes")
         Call<ArrayList<Contrato>> obtenerContratosVigentes(@Header("Authorization") String authorization);
 
         @GET("Contrato/{id}")
@@ -73,6 +73,8 @@ public class ApiClient {
 
         @GET("Pago/PorContrato/{id}")
         Call<ArrayList<Pago>> obtenerPagos(@Header("Authorization") String authorization, @Path("id") String id);
+
+
 
     }
 }

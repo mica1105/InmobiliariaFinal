@@ -25,9 +25,8 @@ import retrofit2.Response;
 
 public class ContratosViewModel extends AndroidViewModel {
 private MutableLiveData<ArrayList<Contrato>> contratos;
-private MutableLiveData<Contrato> alquiler;
 private Context context;
-private Inmueble inmueble;
+
 
     public ContratosViewModel(@NonNull Application application) {
         super(application);
@@ -41,14 +40,9 @@ private Inmueble inmueble;
         return contratos;
     }
 
-    public LiveData<Contrato> getAlquiler() {
-        if (alquiler==null){
-            alquiler=new MutableLiveData<>();
-        }
-        return alquiler;
-    }
 
-    public void recuperarContratos() {
+    public void recuperarContratos(Bundle bundle) {
+        final Inmueble inmueble= (Inmueble) bundle.getSerializable("inmueble");
         SharedPreferences sp = context.getSharedPreferences("datos", 0);
         String token= sp.getString("token","-1");
         Call<ArrayList<Contrato>> lista= ApiClient.getMyApiClient().obtenerContratosVigentes(token);
@@ -56,33 +50,20 @@ private Inmueble inmueble;
             @Override
             public void onResponse(Call<ArrayList<Contrato>> call, Response<ArrayList<Contrato>> response) {
                 if (response.isSuccessful()){
+                    if(inmueble!= null){
+                        ArrayList<Contrato> alquileres= new ArrayList<>();
+                        for(Contrato contrato:response.body()){
+                            if(contrato.getInmueble().getId()== inmueble.getId()){
+                                alquileres.add(contrato);
+                                contratos.postValue(alquileres);
+                            }
+                        }
+                    }else {
                         contratos.postValue(response.body());
+                    }
                 }
                 else {
-                    Toast.makeText(context,"No se encontraton contratos vigentes",Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Contrato>> call, Throwable t) {
-                Toast.makeText(context,t.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void recuperarAlquiler(Bundle bundle) {
-        Inmueble inmueble= (Inmueble) bundle.getSerializable("inmueble");
-        SharedPreferences sp = context.getSharedPreferences("datos", 0);
-        String token= sp.getString("token","-1");
-        Call<ArrayList<Contrato>> lista= ApiClient.getMyApiClient().obtenerContratosVigentes(token);
-        lista.enqueue(new Callback<ArrayList<Contrato>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Contrato>> call, Response<ArrayList<Contrato>> response) {
-                if (response.isSuccessful()){
-                    contratos.postValue(response.body());
-                }
-                else {
-                    Toast.makeText(context,"No se encontraton contratos vigentes",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"No se encontraron contratos vigentes",Toast.LENGTH_LONG).show();
                 }
             }
 

@@ -68,10 +68,10 @@ public class PerfilViewModel extends AndroidViewModel {
             public void onResponse(Call<Propietario> call, Response<Propietario> response) {
                 if(response.isSuccessful()){
                     propietario.postValue(response.body());
-                    Toast.makeText(context,"usuario modificado con exito",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Usuario modificado con exito",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(context,"no se pudo editar el usuario",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"No se pudo editar el usuario",Toast.LENGTH_LONG).show();
                 }
             }
             @Override

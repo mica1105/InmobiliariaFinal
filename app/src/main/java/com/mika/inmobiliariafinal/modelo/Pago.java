@@ -8,13 +8,15 @@ public class Pago implements Serializable {
     private String fecha;
     private double importe;
     private int contratoId;
+    private Contrato alquiler;
 
-    public Pago(int id, int nroPago, String fecha, double importe, int contratoId) {
+    public Pago(int id, int nroPago, String fecha, double importe, int contratoId, Contrato contrato) {
         this.id = id;
         this.nroPago = nroPago;
         this.fecha = fecha;
         this.importe = importe;
-        this.contratoId = contratoId;
+        this.contratoId= contratoId;
+        this.alquiler = contrato;
     }
 
     public int getId() {
@@ -25,11 +27,11 @@ public class Pago implements Serializable {
         this.id = id;
     }
 
-    public int getPago() {
+    public int getNroPago() {
         return nroPago;
     }
 
-    public void setPago(int nroPago) {
+    public void setNroPago(int nroPago) {
         this.nroPago = nroPago;
     }
 
@@ -55,5 +57,13 @@ public class Pago implements Serializable {
 
     public void setContratoId(int contratoId) {
         this.contratoId = contratoId;
+    }
+
+    public Contrato getAlquiler() {
+        return alquiler;
+    }
+
+    public void setAlquiler(Contrato contrato) {
+        this.alquiler = contrato;
     }
 }
