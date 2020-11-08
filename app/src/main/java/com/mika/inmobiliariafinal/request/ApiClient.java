@@ -50,7 +50,7 @@ public class ApiClient {
         @PUT("Propietario")
         Call<Propietario> editarPropietario(@Header("Authorization") String authorization, @Body Propietario usuario);
 
-        @GET("Inmueble/")
+        @GET("Inmueble")
         Call<ArrayList<Inmueble>> obtenerPropiedades(@Header("Authorization") String authorization);
 
         @PUT("Inmueble/{id}")
@@ -67,9 +67,6 @@ public class ApiClient {
 
         @GET("Contrato/Vigentes")
         Call<ArrayList<Contrato>> obtenerContratosVigentes(@Header("Authorization") String authorization);
-
-        @GET("Contrato/{id}")
-        Call<Contrato> obtenerContrato(@Header("Authorization") String authorization, @Path("id") String id);
 
         @GET("Pago/PorContrato/{id}")
         Call<ArrayList<Pago>> obtenerPagos(@Header("Authorization") String authorization, @Path("id") String id);
