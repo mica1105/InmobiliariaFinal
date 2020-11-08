@@ -14,6 +14,8 @@
     <string name="menu_pagos">Pagos</string>
     <string name="menu_contratos">Contratos</string>
     <string name="menu_cerrar">Cerrar Sesión</string>
+    <string name="fragment_contrato">Detalles de Contrato</string>
+    <string name="fragment_pago">Detalles de Pago</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

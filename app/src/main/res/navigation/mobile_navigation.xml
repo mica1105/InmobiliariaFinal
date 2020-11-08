@@ -68,11 +68,11 @@
     <fragment
         android:id="@+id/contratoFragment"
         android:name="com.mika.inmobiliariafinal.ui.contratos.ContratoFragment"
-        android:label="fragment_contrato"
+        android:label="@string/fragment_contrato"
         tools:layout="@layout/fragment_contrato" />
     <fragment
         android:id="@+id/pagoFragment"
         android:name="com.mika.inmobiliariafinal.ui.pagos.PagoFragment"
-        android:label="fragment_pago"
+        android:label="@string/fragment_pago"
         tools:layout="@layout/fragment_pago" />
 </navigation>
