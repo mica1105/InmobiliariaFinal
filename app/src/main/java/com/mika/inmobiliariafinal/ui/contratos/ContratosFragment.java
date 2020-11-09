@@ -73,13 +73,6 @@ public class ContratosFragment extends Fragment {
                     }).attach();
                 }
         });
-        if(getArguments()== null){
-            Bundle bundle= new Bundle();
-            Inmueble inmueble= null;
-            bundle.putSerializable("inmueble",inmueble);
-           vm.recuperarContratos(bundle);
-        }else {
             vm.recuperarContratos(getArguments());
-        }
         }
     }

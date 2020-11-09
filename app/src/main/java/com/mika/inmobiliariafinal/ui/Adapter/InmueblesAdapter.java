@@ -40,7 +40,7 @@ public class InmueblesAdapter extends RecyclerView.Adapter<InmueblesAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Inmueble inmueble = myDataset.get(position);
-        String url="http://192.168.43.54:45455";
+        String url="http://192.168.1.141:45455";
         Glide.with(context)
                 .load(url+myDataset.get(position).getImagen())
                 .placeholder(R.drawable.ic_launcher_background)

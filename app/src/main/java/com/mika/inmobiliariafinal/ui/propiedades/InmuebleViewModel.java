@@ -62,7 +62,7 @@ public class InmuebleViewModel extends AndroidViewModel {
         Inmueble inmuebleRecuperado = (Inmueble) bundle.getSerializable("inmueble");
         Log.d("salida ", inmuebleRecuperado.getImagen()+" "+inmuebleRecuperado.getPropietarioId());
         inmueble.setValue(inmuebleRecuperado);
-        String path= "http://192.168.43.54:45455";
+        String path= "http://192.168.1.141:45455";
         url.setValue(path+inmuebleRecuperado.getImagen());
         if (inmuebleRecuperado.getEstado()== 1){
             disponible.setValue(true);
