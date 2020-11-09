@@ -18,6 +18,7 @@ import com.mika.inmobiliariafinal.R;
 import com.mika.inmobiliariafinal.modelo.Contrato;
 import com.mika.inmobiliariafinal.modelo.Inmueble;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ContratoFragment extends Fragment {
@@ -44,9 +45,9 @@ public class ContratoFragment extends Fragment {
             @Override
             public void onChanged(final Contrato contrato) {
                 direccion.setText(contrato.getInmueble().getDireccion());
-                precio.setText("$"+contrato.getPrecio());
-                fechaInicio.setText(contrato.getFechaInicio());
-                fechaFin.setText(contrato.getFechaFin());
+                precio.setText("$"+contrato.getPrecio()+"0");
+                fechaInicio.setText(contrato.obtenerFecha(contrato.getFechaInicio()).toString());
+                fechaFin.setText(contrato.obtenerFecha(contrato.getFechaFin()).toString());
             }
         });
 

@@ -72,7 +72,7 @@ public class InmuebleFragment extends Fragment {
                 ambientes.setText(propiedad.getAmbientes()+"");
                 tipo.setText(propiedad.getTipo());
                 uso.setText(propiedad.getUso());
-                precio.setText("$"+propiedad.getPrecio());
+                precio.setText("$"+propiedad.getPrecio()+"0");
                 editar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -9,8 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mika.inmobiliariafinal.R;
+import com.mika.inmobiliariafinal.modelo.Inmueble;
 import com.mika.inmobiliariafinal.modelo.Pago;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -41,9 +43,10 @@ public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Pago pagos = myDataset.get(position);
         holder.pago.setText(myDataset.get(position).getNroPago()+"");
-        holder.fecha.setText(myDataset.get(position).getFecha());
-        holder.importe.setText(myDataset.get(position).getImporte()+"");
+        holder.fecha.setText(pagos.obtenerFecha(myDataset.get(position).getFecha()).toString());
+        holder.importe.setText("$"+myDataset.get(position).getImporte()+"0");
     }
 
     @Override

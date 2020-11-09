@@ -1,6 +1,7 @@
 package com.mika.inmobiliariafinal.modelo;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Pago implements Serializable {
     private int id;
@@ -65,5 +66,11 @@ public class Pago implements Serializable {
 
     public void setAlquiler(Contrato contrato) {
         this.alquiler = contrato;
+    }
+
+    public LocalDate obtenerFecha(String fecha) {
+        String date = fecha.substring(0,10);
+        LocalDate localDate = LocalDate.parse(date);
+        return localDate;
     }
 }

@@ -72,7 +72,7 @@
 
         <EditText
             android:id="@+id/etImportePago"
-            android:layout_width="84dp"
+            android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="68dp"
             android:enabled="false"
