@@ -15,6 +15,7 @@ import com.mika.inmobiliariafinal.R;
 import com.mika.inmobiliariafinal.modelo.Contrato;
 import com.mika.inmobiliariafinal.modelo.Inquilino;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ContratosAdapter extends RecyclerView.Adapter<ContratosAdapter.MyViewHolder> {
@@ -40,7 +41,8 @@ public class ContratosAdapter extends RecyclerView.Adapter<ContratosAdapter.MyVi
         holder.direccion.setText(myDataset.get(position).getInmueble().getDireccion());
         holder.fechaInicio.setText(myDataset.get(position).obtenerFecha(contrato.getFechaInicio()));
         holder.fechaFin.setText(myDataset.get(position).obtenerFecha(contrato.getFechaFin()));
-        holder.precio.setText("$"+myDataset.get(position).getPrecio());
+        DecimalFormat formato1= new DecimalFormat("#.00");
+        holder.precio.setText("$"+formato1.format(myDataset.get(position).getPrecio()));
     }
 
     @Override
