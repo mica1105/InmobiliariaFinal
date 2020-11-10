@@ -12,8 +12,10 @@ import com.mika.inmobiliariafinal.R;
 import com.mika.inmobiliariafinal.modelo.Inmueble;
 import com.mika.inmobiliariafinal.modelo.Pago;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.MyViewHolder> {
@@ -45,8 +47,9 @@ public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Pago pagos = myDataset.get(position);
         holder.pago.setText(myDataset.get(position).getNroPago()+"");
-        holder.fecha.setText(pagos.obtenerFecha(myDataset.get(position).getFecha()).toString());
-        holder.importe.setText("$"+myDataset.get(position).getImporte()+"0");
+        holder.fecha.setText(pagos.obtenerFecha(myDataset.get(position).getFecha()));
+        DecimalFormat formato1= new DecimalFormat("#.00");
+        holder.importe.setText("$"+formato1.format(myDataset.get(position).getImporte()));
     }
 
     @Override

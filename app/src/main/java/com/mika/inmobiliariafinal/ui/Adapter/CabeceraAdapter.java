@@ -103,5 +103,8 @@ public class CabeceraAdapter extends RecyclerView.Adapter<CabeceraAdapter.MyView
         return myDataset.size();
     }
 
-
+    public void filtrar(ArrayList<Inquilino> filtroInquilino){
+        this.myDataset = filtroInquilino;
+        notifyDataSetChanged();
+    }
 }

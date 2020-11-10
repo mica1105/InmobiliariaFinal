@@ -93,9 +93,11 @@ public class Contrato implements Serializable {
         this.inquilino = inquilino;
     }
 
-    public LocalDate obtenerFecha(String fecha) {
+    public String obtenerFecha(String fecha) {
         String date = fecha.substring(0,10);
+        DateTimeFormatter esDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date);
-        return localDate;
+        String fechaParseada= localDate.format(esDateFormat);
+        return fechaParseada;
     }
 }

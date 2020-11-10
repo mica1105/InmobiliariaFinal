@@ -45,7 +45,7 @@ private Context context;
         final Bundle bundle1= bundle;
         SharedPreferences sp = context.getSharedPreferences("datos", 0);
         String token= sp.getString("token","-1");
-        Call<ArrayList<Contrato>> lista= ApiClient.getMyApiClient().obtenerContratosVigentes(token);
+        Call<ArrayList<Contrato>> lista= ApiClient.getMyApiClient().obtenerContratos(token);
         lista.enqueue(new Callback<ArrayList<Contrato>>() {
             @Override
             public void onResponse(Call<ArrayList<Contrato>> call, Response<ArrayList<Contrato>> response) {

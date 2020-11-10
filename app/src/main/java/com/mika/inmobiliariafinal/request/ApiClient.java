@@ -65,8 +65,8 @@ public class ApiClient {
         @GET("Inquilino/PorPropietario")
         Call<ArrayList<Inquilino>> obtenerInquilinos(@Header("Authorization") String authorization);
 
-        @GET("Contrato/Vigentes")
-        Call<ArrayList<Contrato>> obtenerContratosVigentes(@Header("Authorization") String authorization);
+        @GET("Contrato")
+        Call<ArrayList<Contrato>> obtenerContratos(@Header("Authorization") String authorization);
 
         @GET("Pago/PorContrato/{id}")
         Call<ArrayList<Pago>> obtenerPagos(@Header("Authorization") String authorization, @Path("id") String id);

@@ -25,6 +25,8 @@ public class InquilinosViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Inquilino>> inquilinos;
     private Context context;
 
+    ArrayList<Inquilino> listaInquilinos;
+
     public InquilinosViewModel(@NonNull Application application) {
         super(application);
         context= application.getApplicationContext();
@@ -40,11 +42,13 @@ public class InquilinosViewModel extends AndroidViewModel {
     public void recuperarInquilinos(){
         SharedPreferences sp = context.getSharedPreferences("datos", 0);
         final String token= sp.getString("token","-1");
-        Call<ArrayList<Inquilino>> lista= ApiClient.getMyApiClient().obtenerInquilinos(token);
+        final Call<ArrayList<Inquilino>> lista= ApiClient.getMyApiClient().obtenerInquilinos(token);
         lista.enqueue(new Callback<ArrayList<Inquilino>>() {
             @Override
             public void onResponse(Call<ArrayList<Inquilino>> call, Response<ArrayList<Inquilino>> response) {
                 if (response.isSuccessful()){
+                    listaInquilinos= new ArrayList<>();
+                    listaInquilinos= response.body();
                     inquilinos.postValue(response.body());
                 }
                 else {
@@ -57,5 +61,16 @@ public class InquilinosViewModel extends AndroidViewModel {
                 Toast.makeText(context,t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void filtrar(String texto) {
+        ArrayList<Inquilino> filtrarLista = new ArrayList<>();
+
+        for(Inquilino usuario : listaInquilinos) {
+            if(usuario.getNombre().toLowerCase().contains(texto.toLowerCase())) {
+                filtrarLista.add(usuario);
+            }
+        }
+        inquilinos.setValue(filtrarLista);
     }
 }
