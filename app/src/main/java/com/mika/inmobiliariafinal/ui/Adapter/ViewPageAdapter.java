@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.mika.inmobiliariafinal.modelo.Inquilino;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,4 +33,5 @@ public class ViewPageAdapter extends FragmentStateAdapter {
     public void addFragment(Fragment fragment){
         fragmentList.add(fragment);
     }
+
 }

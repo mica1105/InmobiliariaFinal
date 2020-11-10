@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="5dp"
+    app:cardElevation="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/images">
+        <TextView
+            android:id="@+id/tvDireccion1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#AFF8BD"
+            android:layout_marginTop="10dp"
+            android:text="Dirección"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Fecha de Inicio"
+            android:textAlignment="center"
+            android:inputType="date"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/tvFechaInicio1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Aqui Fecha"
+            android:textAlignment="center"
+            android:inputType="date"
+            android:textColor="#6eb5ff"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Fecha de Finalización"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tvFechaFin1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Aqui Fecha"
+            android:textAlignment="center"
+            android:textColor="#6eb5ff"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Precio Mensual"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tvPrecio1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Aqui Precio"
+            android:textAlignment="center"
+            android:textColor="#6eb5ff"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

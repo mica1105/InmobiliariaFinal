@@ -15,6 +15,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -32,6 +33,7 @@ public class ContratosFragment extends Fragment {
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
     private ViewPageAdapter adapter;
+    private Button verContratos;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -49,6 +51,13 @@ public class ContratosFragment extends Fragment {
     }
 
     public void inicializar(View v){
+        verContratos= v.findViewById(R.id.btContratosTodos);
+        verContratos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.todosContratosFragment);
+            }
+        });
         viewPager= v.findViewById(R.id.vpContratos);
         tabLayout=v.findViewById(R.id.tlContratos);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratosViewModel.class);
@@ -73,6 +82,6 @@ public class ContratosFragment extends Fragment {
                     }).attach();
                 }
         });
-            vm.recuperarContratos(getArguments());
+        vm.recuperarContratosVigentes(getArguments());
         }
     }

@@ -18,5 +18,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
+    <Button
+        android:id="@+id/btContratosTodos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_textview"
+        android:elevation="5dp"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:padding="7dp"
+        android:text="Ver Todos los contratos"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        />
 </LinearLayout>

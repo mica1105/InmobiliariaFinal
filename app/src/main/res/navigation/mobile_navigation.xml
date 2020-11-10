@@ -69,10 +69,20 @@
         android:id="@+id/contratoFragment"
         android:name="com.mika.inmobiliariafinal.ui.contratos.ContratoFragment"
         android:label="@string/fragment_contrato"
-        tools:layout="@layout/fragment_contrato" />
+        tools:layout="@layout/fragment_contrato" >
+        <action
+            android:id="@+id/action_contratoFragment_to_todosContratosFragment"
+            app:destination="@id/todosContratosFragment"
+            app:popUpTo="@id/contratoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/pagoFragment"
         android:name="com.mika.inmobiliariafinal.ui.pagos.PagoFragment"
         android:label="@string/fragment_pago"
         tools:layout="@layout/fragment_pago" />
+    <fragment
+        android:id="@+id/todosContratosFragment"
+        android:name="com.mika.inmobiliariafinal.ui.contratos.TodosContratosFragment"
+        android:label="Contratos"
+        tools:layout="@layout/fragment_contratos_todos" />
 </navigation>
