@@ -65,11 +65,12 @@ public class InquilinosViewModel extends AndroidViewModel {
 
     public void filtrar(String texto) {
         ArrayList<Inquilino> filtrarLista = new ArrayList<>();
-
+        if (listaInquilinos!= null){
         for(Inquilino usuario : listaInquilinos) {
             if(usuario.getNombre().toLowerCase().contains(texto.toLowerCase())) {
                 filtrarLista.add(usuario);
             }
+        }
         }
         inquilinos.setValue(filtrarLista);
     }
